@@ -1,0 +1,8 @@
+{
+    "development" : {
+        "host" : "DB IP",
+        "user" : "admin",
+        "password" : "password",
+        "database" : "database"
+    }
+}
