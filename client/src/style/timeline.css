@@ -1,0 +1,13 @@
+.timeline{
+    width: 100%;
+    height: 100vh;
+}
+
+.selectSection{
+    padding-top: 1rem;
+}
+
+.yearval{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
