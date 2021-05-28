@@ -18,7 +18,7 @@
     height: 100vh;
     filter: blur(8px);
     transform: scale(1.1);
-    background-image: linear-gradient(to right, rgb(11, 11, 61), rgb(5, 45, 46));
+    background-image: linear-gradient(0.25turn, rgb(11, 11, 61) 20%, rgb(5, 45, 46) 80%);
     z-index: 0;
 }
 
@@ -46,15 +46,15 @@
 
     color: white;
 
-    font-size: 4rem;
+    font-size: 6vmax;
     justify-content: center;
     align-items: center;
 
     border: solid 0.1rem white;
     border-radius: 50%;
 
-    width: 20rem;
-    height: 20rem;
+    width: 5em;
+    height: 5em;
     
 }
 
@@ -62,13 +62,13 @@
 
     position: absolute;
     content: '';
-    width: 25rem;
-    height: 25rem;
-    border-right: solid rgba(19, 55, 211, 0.5) 0.6rem;
+    width: 6em;
+    height: 6em;
+    border-right: solid rgba(0, 30, 165, 0.562) 0.5rem;
 
-    border-radius: 50%;
+    border-radius: 60%;
 
-    animation: animate 20s linear infinite;
+    animation: animate 5s linear infinite;
 }
 
 .logo {
@@ -89,10 +89,24 @@
 
 .sublogo{
     font-family: Lato;
-    font-size: 0.8rem;
+    font-size: 0.8vmax;
 }
 
 .CoverButton{
     position: relative;
     margin-top: 10rem;
+    
+}
+
+.ant-btn-primary {
+    background-color: rgba(0, 30, 165, 0.562);
+    border-color: rgba(0, 30, 165, 0.562);
+}
+.ant-btn-primary:hover{
+    background-color: rgba(0, 47, 255, 0.562);
+    border-color: rgba(0, 47, 255, 0.562);
+}
+.ant-btn-primary:focus{
+    background-color: rgba(0, 47, 255, 0.562);
+    border-color: rgba(0, 47, 255, 0.562);
 }

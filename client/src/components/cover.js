@@ -31,7 +31,11 @@ const Cover = () => {
           </div>
           <div className="circle2" />
           <div className="CoverButton">
-            <Button type="primary" shape='circle' onClick={()=>scrollTo(section)}>
+            <Button type="primary" shape='circle' onClick={()=>scrollTo(section)} style={{
+              width:"4rem",
+              height:"4rem",
+              fontSize:"2rem"
+            }}>
                 <DownOutlined>s</DownOutlined>
             </Button>
           </div>
