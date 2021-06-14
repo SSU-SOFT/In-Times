@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www"
+    "start": "nodemon --exec babel-node ./bin/www",
+    "deploy": "pm2 start bin/www --interpreter node_modules/@babel/node/bin/babel-node.js"
   },
   "dependencies": {
     "@babel/cli": "^7.14.3",
@@ -22,6 +23,7 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "pm2": "^5.1.0"
   }
 }

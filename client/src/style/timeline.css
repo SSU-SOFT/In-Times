@@ -49,8 +49,8 @@
     overflow: hidden;
 
 
-    width: 50vmax;
-    height: 100%;
+    width: 80vw;
+    height: 20vh;
     margin-top: 10px;
     
     background-position: right;
@@ -71,3 +71,20 @@
     padding: 20px !important;
 }
 
+.Card{
+    text-align: center;
+}
+
+.clusterhead{
+    width: 100%;
+    text-align: center;
+
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.clusterdate{
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 1em;
+}
