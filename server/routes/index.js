@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 
-import postRouter from './posts.js';
+import newsRouter from './news.js';
 import clusterRouter from './clusters.js';
 
 // router.use('/user', users);
-router.use('/post', postRouter);
+router.use('/news', newsRouter);
 router.use('/cluster', clusterRouter);
-
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
