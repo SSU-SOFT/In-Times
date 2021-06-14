@@ -1,8 +1,8 @@
 {
     "development" : {
-        "host" : "DB IP",
+        "host" : "artravel-db.cqdz8o1pfofy.ap-northeast-2.rds.amazonaws.com",
         "user" : "admin",
-        "password" : "password",
-        "database" : "database"
+        "password" : "arsns123",
+        "database" : "InTimes"
     }
 }
