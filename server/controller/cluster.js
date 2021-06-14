@@ -1,59 +1,67 @@
 import db from '../middleware/db'
 import httpStatus from 'http-status-codes'
 import security from '../middleware/security'
-//Date to yyyy-mm-dd
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-}
-
 
 // 게시글 조회
-async function getAll (req, res) {
-    console.log(req.query);
-
+async function getClusterAll (req, res) {
     try {
-        let SQLresult = await db.query('select * from News limit 20;');
-                
-        if(newsInfo.length > 0){
+        let result = await db.query('select * from Clusters;');
+        const clusterInfo = [];
+        
+
+        if(result.length > 0){
+            result.map((val)=>{
+                clusterInfo.push({
+                    cId : val.cId,
+                    count : val.count,
+                    Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(',').slice(0,5),
+                    summary : val.summary,
+                    img : val.img,
+                })
+            });
             const returnObj = {
-                SQLresult : SQLresult
+                clusterInfo : clusterInfo,
             }
             res.status(httpStatus.OK).send(returnObj)
         } else{
             res.status(httpStatus.NOT_FOUND).send()
         }
    } catch(error) {
-        console.error(error, "posts api error")
+        console.error(error, "clusters api error")
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send([])
    }
 }
 
-async function getCluster (req, res) {
-    let id = req.params.id;
+async function getClusterId (req, res) {
+    let cId = req.params.cId;
     try {
-        let newsInfo = await db.query('select * from News where postID = ?', [id]);
+        let result = await db.query('select * from Clusters where cId = ?', [cId]);
+        const clusterInfo = [];
 
-        if(postInfo.length > 0){
+        if(result.length > 0){
+            result.map((val)=>{
+                clusterInfo.push({
+                    cId : val.cId,
+                    count : val.count,
+                    Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(','),
+                    summary : val.summary,
+                    img : val.img,
+                })
+            });
             const returnObj = {
-                newsInfo : newsInfo
+                clusterInfo : clusterInfo,
             }
             res.status(httpStatus.OK).send(returnObj)
         } else{
             res.status(httpStatus.NOT_FOUND).send()
         }
    } catch(error) {
-        console.error(error, "posts api error")
+        console.error(error, "clusters api error")
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send([])
    }
 }
-
 
 export default {
-    getAll,
-    getCluster,
+    getClusterAll,
+    getClusterId,
 }
