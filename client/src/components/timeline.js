@@ -163,8 +163,10 @@ const Timeline = () => {
                   allowDynamicUpdate
                   cardPositionHorizontal='TOP'
                   theme={{ primary: "rgba(0, 30, 165, 1)", secondary: "white" }}
-                  useReadMore="false"
-                >
+                >   
+                <div className="chrono-icons">
+                    <img src="http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg" alt="image1" />
+                </div>
                   {
                     items.map((v) => {
                       return (
@@ -177,7 +179,7 @@ const Timeline = () => {
                             {v.date}
                           </div>
                           <div>
-                            <Image width={200} src={'http://13.209.70.51:5000' + v.img}>
+                            <Image width={400} src={'http://13.209.70.51:5000' + v.img}>
 
                             </Image>
                           </div>
@@ -190,7 +192,11 @@ const Timeline = () => {
                                     article.img !== '/images/no-image.png' ?
                                       {
                                         backgroundImage: "url(" + article.img + ")",
-                                      } : { backgroundImage: "url('http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg')", }} onClick={() => OnHandleClick({ url: article.url })}  >
+                                      } : { backgroundImage: "url('http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg')", }} onClick={() => OnHandleClick({ url: article.url })}  
+                                      
+                                      
+                                      
+                                      >
 
                                   <Row>
                                     <Col span={12}>
