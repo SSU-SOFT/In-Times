@@ -3,10 +3,12 @@ var router = express.Router();
 
 
 import postRouter from './posts.js';
-
+import clusterRouter from './clusters.js';
 
 // router.use('/user', users);
 router.use('/post', postRouter);
+router.use('/cluster', clusterRouter);
+
 
 
 /* GET home page. */
