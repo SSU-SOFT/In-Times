@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../style/timeline.css";
 import { Chrono } from "react-chrono";
-import { Row, Col, Menu, Select, Button, Divider, Card, Typography, Modal } from "antd";
+import { Row, Col, Menu, Select, Button, Divider, Card, Typography, Modal, Image } from "antd";
 import axios from 'axios';
 import instance from "../module/instance";
 
@@ -19,79 +19,111 @@ const Timeline = () => {
   const [data, setdata] = useState([]);
   const [cInfo, setcInfo] = useState([]);
   const [selected, setselected] = useState(false);
+  const [btndisable, setbtndisable] = useState(true);
 
-
-
-  const lst = [];
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   const DropDownSelect = (value) => {
     setselected(false)
     setyearval(value)
   };
 
+  function date_ascending(a, b) {
+    var dateA = new Date(a['date']).getTime();
+    var dateB = new Date(b['date']).getTime();
+    return dateA > dateB ? 1 : -1;
+  };
+
   const getData = async () => {
 
-    console.log('yearval:' + yearval)
+    let nums = []
+
     if (yearval === '2019') {
       setdata([])
-      for (let i = 1; i < 51; i++) {
-        instance.get('/news', { params: { cId: i } })
-          .then(response => { setdata(data => [...data, response.data.newsInfo]) }) // SUCCESS
-          .catch(response => { console.log(response) }); // ERROR
 
-      }
-      instance.get('/cluster')
-        .then(response => { setcInfo(response.data.clusterInfo); }) // SUCCESS
+
+      await instance.get('/cluster')
+        .then(response => { 
+          let ordered = []
+          ordered = response.data.clusterInfo
+          ordered.sort(date_ascending)
+          setcInfo(ordered)
+          ordered.map(x=>nums.push(x.cId))
+        }) // SUCCESS
         .catch(response => { console.log(response) }); // ERROR
 
     } else if (yearval === '2020') {
       setdata([])
     }
 
+    console.log(nums)
+
+    const results = nums.reduce((prevPrms, num) => (
+      prevPrms.then(async prevRes => {
+        const currRes = await instance.get('/news/?cId=' + num)
+        return [...prevRes, currRes]
+      })
+    ), Promise.resolve([]))
+
+    results.then(response => {
+      console.log(response)
+      setdata(response)
+    })
+
+    // await instance.get('/news/?cId=' + i)
+    //   .then(response => { setdata(data => [...data, response.data.newsInfo]) }) // SUCCESS
+    //   .catch(response => { console.log(response) }); // ERROR
+
+
+
   }
+
 
   useEffect(() => {
     getData()
+    
   }, [yearval]);
 
 
+  useEffect(() => {
+    data.length>0? setbtndisable(false):setbtndisable(true)
+  }, [data]);
+
+
+
   const SetData = () => {
-    setselected(true)
-    if (data.length > 0) {
-      let tempitem = [];
 
-      if (yearval === '2019') {
-        for (let i = 0; i < 50; i++) {
+    if (yearval !== '0') {
+      console.log(data)
+      console.log(cInfo)
+      setselected(true)
+      if (data.length > 0) {
+        let tempitem = [];
 
-          let temptitle = cInfo[i].Topic.join(",");
-          const temp = {
-            title: temptitle,
-            date: "2019-01-01",
-            articles: data[i],
-          };
+        if (yearval === '2019') {
+          for (let i = 0; i < 50; i++) {
 
-          tempitem.push(temp);
+            let temptitle = cInfo[i].Topic.join(",");
+            let cloud = cInfo[i].img
+            let date = cInfo[i].date
+            const temp = {
+              title: temptitle,
+              img: cloud,
+              articles: data[i].data.newsInfo,
+              date:date
+            };
+
+            tempitem.push(temp);
+          }
+
         }
+        setitems(tempitem);
+        tempitem = [];
 
+      } else {
+        setselected(false)
       }
-      setitems(tempitem);
-      tempitem = [];
-
-    }else{
-      setselected(false)
     }
+
 
 
   }
@@ -104,6 +136,10 @@ const Timeline = () => {
     height: "10vmax"
   };
 
+  const OnHandleClick = (props) => {
+    window.open(props.url);
+  }
+
 
   return (
     <>
@@ -114,7 +150,7 @@ const Timeline = () => {
             <Option value="2020">2020</Option>
           </Select>
           {/* <div className="yearval">{yearval}</div> */}
-          <Button onClick={SetData}>Get</Button>
+          <Button onClick={SetData} disabled={btndisable}>Get</Button>
         </Row>
         <Divider></Divider>
         {
@@ -134,11 +170,16 @@ const Timeline = () => {
                       return (
 
                         <div key={v} className="Card">
-                          <div>
+                          <div className="clusterhead">
                             {v.title}
                           </div>
-                          <div>
+                          <div className="clusterdate">
                             {v.date}
+                          </div>
+                          <div>
+                            <Image width={200} src={'http://13.209.70.51:5000' + v.img}>
+
+                            </Image>
                           </div>
                           {v.articles.map((article) => {
                             return (
@@ -149,17 +190,20 @@ const Timeline = () => {
                                     article.img !== '/images/no-image.png' ?
                                       {
                                         backgroundImage: "url(" + article.img + ")",
-                                      } : { backgroundImage: "url('')", }} onClick={showModal}  >
+                                      } : { backgroundImage: "url('http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg')", }} onClick={() => OnHandleClick({ url: article.url })}  >
+
                                   <Row>
                                     <Col span={12}>
                                       <div>
-                                        <Title>
+                                        <Title style={{
+                                          fontSize:"2em"
+                                        }}>
                                           {article.headline}
                                         </Title>
                                       </div>
                                       <div>
                                         <Text>
-                                          {article.text}
+                                          {article.text}...
                                         </Text>
 
                                       </div>
@@ -188,9 +232,6 @@ const Timeline = () => {
             </div>
         }
 
-        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-          hello
-        </Modal>
       </div>
     </>
   );
