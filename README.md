@@ -8,4 +8,4 @@
 ex) git push --set-upstream origin update_README
 - 깃 저장소의 Pull requests 탭에서 Compare & pull request 클릭
 - 팀원과 회의 후 Merge
-- git branch -D 기능_이름 (생성된 브랜치 삭제)
+- git push origin --delete feature/TEST-860 (원격 저장소에 생성된 브랜치 삭제)
