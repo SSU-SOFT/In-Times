@@ -1,89 +1,101 @@
 import React, { useState, useEffect } from "react";
 import "../style/timeline.css";
 import { Chrono } from "react-chrono";
-import { Row, Col, Menu, Select, Button, Divider, Card, Typography } from "antd";
+import { Row, Col, Menu, Select, Button, Divider, Card, Typography, Modal } from "antd";
+import axios from 'axios';
+import instance from "../module/instance";
 
 const { Title, Paragraph, Text, Link } = Typography;
+
+var count = 0;
 
 const Timeline = () => {
 
 
   const { Option } = Select;
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [items, setitems] = useState([]);
-  const [yearval, setyearval] = useState(2019);
+  const [yearval, setyearval] = useState('0');
+  const [data, setdata] = useState([]);
+  const [cInfo, setcInfo] = useState([]);
+  const [selected, setselected] = useState(false);
 
-  const DropDownSelect = (value) => {
-    console.log(value);
-    setyearval(value);
+
+
+  const lst = [];
+
+  const showModal = () => {
+    setIsModalVisible(true);
   };
 
-  const SetData = (year) => {
-    let tempitem = [];
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
 
-    if (year === "2019") {
-      for (let i = 0; i < 20; i++) {
-        const temp = {
-          title: "문희상",
-          date: "2019-01-01",
-          articles: [{
-            title: "first article",
-            content: "contentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            image: 'http://img.hani.co.kr/imgdb/resize/2018/1231/00503152_20181231.JPG'
-          }, {
-            title: "Second article",
-            content: "2content",
-            image: 'https://pds.joins.com/news/component/htmlphoto_mmdata/201901/01/67bd461e-15e1-4c18-9143-71e9e4b9a283.jpg'
-          },
-          {
-            title: "Second article",
-            content: "2content",
-            image: 'https://dimg.donga.com/wps/NEWS/IMAGE/2018/12/31/93504457.3.jpg'
-          }],
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
+  const DropDownSelect = (value) => {
+    setselected(false)
+    setyearval(value)
+  };
 
+  const getData = async () => {
 
-        };
+    console.log('yearval:' + yearval)
+    if (yearval === '2019') {
+      setdata([])
+      for (let i = 1; i < 51; i++) {
+        instance.get('/news', { params: { cId: i } })
+          .then(response => { setdata(data => [...data, response.data.newsInfo]) }) // SUCCESS
+          .catch(response => { console.log(response) }); // ERROR
 
-        tempitem.push(temp);
       }
-    }
-    if (year === "2020") {
-      for (let i = 0; i < 20; i++) {
-        const temp = {
-          title: "교육",
-          articles: [{
-            title: "first article",
-            content: "content",
-            image: '//img.seoul.co.kr/img/upload/2019/12/31/SSI_20191231165940_O2.jpg'
-          },
-          {
-            title: "second",
-            content: "content",
-            image: ''
-          }, {
-            title: "third",
-            content: "content",
-            image: 'http://image.kmib.co.kr/online_image/2019/1231/201912311745_11120924115091_1.jpg'
-          }],
+      instance.get('/cluster')
+        .then(response => { setcInfo(response.data.clusterInfo); }) // SUCCESS
+        .catch(response => { console.log(response) }); // ERROR
 
-        };
-
-        tempitem.push(temp);
-      }
+    } else if (yearval === '2020') {
+      setdata([])
     }
-    setitems(tempitem);
-    tempitem = [];
+
   }
 
-
   useEffect(() => {
-    SetData(yearval)
+    getData()
   }, [yearval]);
 
-  useEffect(() => {
-    SetData('2019')
-  }, []);
+
+  const SetData = () => {
+    setselected(true)
+    if (data.length > 0) {
+      let tempitem = [];
+
+      if (yearval === '2019') {
+        for (let i = 0; i < 50; i++) {
+
+          let temptitle = cInfo[i].Topic.join(",");
+          const temp = {
+            title: temptitle,
+            date: "2019-01-01",
+            articles: data[i],
+          };
+
+          tempitem.push(temp);
+        }
+
+      }
+      setitems(tempitem);
+      tempitem = [];
+
+    }else{
+      setselected(false)
+    }
+
+
+  }
+
 
 
   const gridStyle = {
@@ -97,96 +109,88 @@ const Timeline = () => {
     <>
       <div className="timeline">
         <Row align="middle" justify="center" className="selectSection">
-          <Select defaultValue="2019" onChange={DropDownSelect}>
+          <Select onChange={DropDownSelect} placeholder='Select Year' >
             <Option value="2019">2019</Option>
             <Option value="2020">2020</Option>
           </Select>
-          <div className="yearval">{yearval}</div>
-          {/* <Button onClick={OnGetClick}>Get</Button> */}
+          {/* <div className="yearval">{yearval}</div> */}
+          <Button onClick={SetData}>Get</Button>
         </Row>
         <Divider></Divider>
-        <Row className="timeline_row">
-          <div className="timeline_visual">
-            <Chrono
-              items={items}
-              mode="HORIZONTAL"
-              allowDynamicUpdate
-              cardPositionHorizontal='TOP'
-              theme={{ primary: "rgba(0, 30, 165, 1)", secondary: "white" }}
-              useReadMore="false"
-            >
-              {
-                items.map((v) => {
-                  return (
-                    <div key={v} className="Card">
-                      <div>
-                        {v.title}
-                      </div>
-                      <div>
-                        {v.date}
-                      </div>
-                      {v.articles.map((article) => {
-                        return (
-                          <>
+        {
+          selected ?
+            <Row className="timeline_row">
+              <div className="timeline_visual">
+                <Chrono
+                  items={items}
+                  mode="HORIZONTAL"
+                  allowDynamicUpdate
+                  cardPositionHorizontal='TOP'
+                  theme={{ primary: "rgba(0, 30, 165, 1)", secondary: "white" }}
+                  useReadMore="false"
+                >
+                  {
+                    items.map((v) => {
+                      return (
 
-                            <Card key={article} hoverable
-                              className="articleCard" style={{
+                        <div key={v} className="Card">
+                          <div>
+                            {v.title}
+                          </div>
+                          <div>
+                            {v.date}
+                          </div>
+                          {v.articles.map((article) => {
+                            return (
+                              <>
 
-                                backgroundImage: "url(" + article.image + ")",
-                              }}>
-                              <Row>
-                                <Col span={12}>
-                                  <div>
-                                    <Title>
-                                      {article.title}
-                                    </Title>
-                                  </div>
-                                  <div>
-                                    <Text>
-                                      {article.content}
-                                    </Text>
+                                <Card key={article} hoverable
+                                  className="articleCard" style={
+                                    article.img !== '/images/no-image.png' ?
+                                      {
+                                        backgroundImage: "url(" + article.img + ")",
+                                      } : { backgroundImage: "url('')", }} onClick={showModal}  >
+                                  <Row>
+                                    <Col span={12}>
+                                      <div>
+                                        <Title>
+                                          {article.headline}
+                                        </Title>
+                                      </div>
+                                      <div>
+                                        <Text>
+                                          {article.text}
+                                        </Text>
 
-                                  </div>
-                                </Col>
-                                <Col span={12}>
-                                  <div>
-                                  </div>
-                                </Col>
-                              </Row>
+                                      </div>
+                                    </Col>
+                                    <Col span={12}>
+                                      <div>
+                                      </div>
+                                    </Col>
+                                  </Row>
 
-                            </Card>
-                          </>)
-                      })}
-                      {/* <Card style={{width:"60vmax"}}>
-                        {v.articles.map((article) => {
-                          return (
-                            <>
-                              <Card.Grid key={article} hoverable
-                                className="articleCard" style={gridStyle}>
-                                <div>
-                                  <img src={article.image}>
-                                  </img>
-                                  <div>
-                                    {article.title}
-                                  </div>
-                                  <div>
-                                    {article.content}
-                                  </div>
-                                </div>
+                                </Card>
+                              </>)
+                          })}
 
-                              </Card.Grid>
-                            </>)
-                        })}
-                      </Card> */}
-                    </div>
-                  );
-                })
-              }
-            </Chrono>
-          </div>
+                        </div>
+                      );
+                    })
+                  }
+                </Chrono>
+              </div>
 
 
-        </Row>
+            </Row>
+            :
+            <div>
+            </div>
+        }
+
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          hello
+        </Modal>
       </div>
     </>
   );
