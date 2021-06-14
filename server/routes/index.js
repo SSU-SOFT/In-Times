@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-const users = require('./users.js');
-const posts = require('./posts.js');
 
+import newsRouter from './news.js';
+import clusterRouter from './clusters.js';
 
-router.use('/user', users);
-router.use('/post', posts);
-
+// router.use('/user', users);
+router.use('/news', newsRouter);
+router.use('/cluster', clusterRouter);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

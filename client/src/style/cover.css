@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../assets/fonts/Lato-Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'Lato-Thin';
+    src: url('../assets/fonts/Lato-Thin.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 100;
+}
+
+.background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(8px);
+    transform: scale(1.1);
+    background-image: linear-gradient(0.25turn, rgb(11, 11, 61) 20%, rgb(5, 45, 46) 80%);
+    z-index: 0;
+}
+
+.CoverBox {
+    overflow: hidden;
+}
+
+.CoverContent {
+    position: absolute;
+    z-index: 1;
+
+    left: 50%;
+    top: 50%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+}
+
+.circle {
+    display: flex;
+
+    color: white;
+
+    font-size: 6vmax;
+    justify-content: center;
+    align-items: center;
+
+    border: solid 0.1rem white;
+    border-radius: 50%;
+
+    width: 5em;
+    height: 5em;
+    
+}
+
+.circle::before {
+
+    position: absolute;
+    content: '';
+    width: 6em;
+    height: 6em;
+    border-right: solid rgba(0, 30, 165, 0.562) 0.5rem;
+
+    border-radius: 60%;
+
+    animation: animate 5s linear infinite;
+}
+
+.logo {
+    font-family: Lato-Thin;
+    font-weight: 100;
+}
+
+
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.sublogo{
+    font-family: Lato;
+    font-size: 0.8vmax;
+}
+
+.CoverButton{
+    position: relative;
+    margin-top: 10rem;
+    
+}
+
+.ant-btn-primary {
+    background-color: rgba(0, 30, 165, 0.562);
+    border-color: rgba(0, 30, 165, 0.562);
+}
+.ant-btn-primary:hover{
+    background-color: rgba(0, 47, 255, 0.562);
+    border-color: rgba(0, 47, 255, 0.562);
+}
+.ant-btn-primary:focus{
+    background-color: rgba(0, 47, 255, 0.562);
+    border-color: rgba(0, 47, 255, 0.562);
+}
