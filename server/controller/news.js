@@ -1,29 +1,21 @@
 import db from '../middleware/db'
 import httpStatus from 'http-status-codes'
 import security from '../middleware/security'
-//Date to yyyy-mm-dd
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-}
+import modules from './modules.js'
 
 // 게시글 조회
 async function getNews (req, res) {
     console.log(req.query);
-    const cId = req.query.cId;
+    const cId = req.query.cId?req.query.cId:1;
     const page = req.query.page?req.query.page-1:0;
     const pageSize = req.query.pageSize?parseInt(req.query.pageSize):20;
-
+    
     try {
         let result = await db.query('select * from News WHERE cId = ? AND aId >= ? ORDER BY aId ASC limit ?;', [cId, page*pageSize, pageSize]);
         let newsInfo = [];
         if(result.length > 0){
             result.map((val) =>{
-                const date = getFormatDate(val.date);
+                const date = modules.getFormatDate(val.date);
                 const text = val.text.toString().substring(0,200);
                 
                 newsInfo.push({
@@ -35,7 +27,7 @@ async function getNews (req, res) {
                     headline: val.headline,
                     text: text,
                     url: val.url,
-                    img: val.img?val.img:"/images/moon.png"
+                    img: val.img==="[]"?"/images/no-image.png":val.img.replace(/\[|\]|\'| /g, "")
                 });
             });
             const returnObj = {
@@ -58,7 +50,7 @@ async function getNewsId (req, res) {
         let newsInfo = [];
         if(result.length > 0){
             result.map((val) =>{
-                const date = getFormatDate(val.date);
+                const date = modules.getFormatDate(val.date);
                 newsInfo.push({
                     aId : val.aId,
                     cId : val.cId,
@@ -68,7 +60,7 @@ async function getNewsId (req, res) {
                     headline: val.headline,
                     text: val.text,
                     url: val.url,
-                    img: val.img!="[]"?val.img:"/images/moon.png"
+                    img: val.img==="[]"?"/images/no-image.png":val.img.replace(/\[|\]|\'| /g, "")
                 });
             });
             const returnObj = {

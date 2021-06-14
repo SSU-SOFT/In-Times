@@ -1,6 +1,8 @@
 import db from '../middleware/db'
 import httpStatus from 'http-status-codes'
 import security from '../middleware/security'
+import modules from './modules.js'
+
 
 // 게시글 조회
 async function getClusterAll (req, res) {
@@ -9,13 +11,16 @@ async function getClusterAll (req, res) {
         const clusterInfo = [];
 
         if(result.length > 0){
+            
             result.map((val)=>{
+                const date = modules.getFormatDate(val.date).substring(0, 7);
                 clusterInfo.push({
                     cId : val.cId,
                     count : val.count,
                     Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(',').slice(0,5),
                     summary : val.summary,
                     img : val.img,
+                    date : date,
                 })
             });
             const returnObj = {
@@ -45,6 +50,7 @@ async function getClusterId (req, res) {
                     Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(','),
                     summary : val.summary,
                     img : val.img,
+                    date : modules.getFormatDate(val.date).substring(0, 7)
                 })
             });
             const returnObj = {
