@@ -7,7 +7,6 @@ async function getClusterAll (req, res) {
     try {
         let result = await db.query('select * from Clusters;');
         const clusterInfo = [];
-        
 
         if(result.length > 0){
             result.map((val)=>{
