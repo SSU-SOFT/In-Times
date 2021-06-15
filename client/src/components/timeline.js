@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../style/timeline.css";
 import { Chrono } from "react-chrono";
-import { Row, Col, Menu, Select, Button, Divider, Card, Typography, Modal, Image } from "antd";
+import { Row, Col,  Select, Button, Divider, Card, Typography,  Image, Spin } from "antd";
 import axios from 'axios';
 import instance from "../module/instance";
 
@@ -164,9 +164,14 @@ const Timeline = () => {
                   cardPositionHorizontal='TOP'
                   theme={{ primary: "rgba(0, 30, 165, 1)", secondary: "white" }}
                 >   
-                <div className="chrono-icons">
-                    <img src="http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg" alt="image1" />
-                </div>
+                {/* <div className="chrono-icons">
+                  {
+                    items.map((v)=>{
+                      return(<div className="timelinebutton">{v.date.substring(5,7)}</div>)
+                    })
+                  }
+                    
+                </div> */}
                   {
                     items.map((v) => {
                       return (
@@ -234,7 +239,9 @@ const Timeline = () => {
 
             </Row>
             :
-            <div>
+            <div className="wait">
+              INTIMES
+              <Spin size='large' className="spin"/>
             </div>
         }
 
