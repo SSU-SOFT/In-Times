@@ -33,9 +33,13 @@ const Timeline = () => {
     return dateA > dateB ? 1 : -1;
   };
 
+
   const getData = async () => {
 
     let nums = []
+
+    let datas=[]
+    let cinfos=[]
 
     if (yearval === '2019') {
       setdata([])
@@ -43,11 +47,12 @@ const Timeline = () => {
 
       await instance.get('/cluster')
         .then(response => { 
-          let ordered = []
-          ordered = response.data.clusterInfo
-          ordered.sort(date_ascending)
-          setcInfo(ordered)
-          ordered.map(x=>nums.push(x.cId))
+          let ordered = [];
+          ordered = response.data.clusterInfo;
+          ordered.sort(date_ascending);
+          setcInfo(ordered);
+          ordered.map(x=>nums.push(x.cId));
+          cinfos=ordered;
         }) // SUCCESS
         .catch(response => { console.log(response) }); // ERROR
 
@@ -55,7 +60,7 @@ const Timeline = () => {
       setdata([])
     }
 
-    console.log(nums)
+    console.log(cinfos)
 
     const results = nums.reduce((prevPrms, num) => (
       prevPrms.then(async prevRes => {
@@ -65,23 +70,22 @@ const Timeline = () => {
     ), Promise.resolve([]))
 
     results.then(response => {
-      console.log(response)
+      
+      // temp=response
+      // temp.map((x)=>datas.push(x))
       setdata(response)
     })
-
-    // await instance.get('/news/?cId=' + i)
-    //   .then(response => { setdata(data => [...data, response.data.newsInfo]) }) // SUCCESS
-    //   .catch(response => { console.log(response) }); // ERROR
-
-
 
   }
 
 
   useEffect(() => {
     getData()
-    
   }, [yearval]);
+
+  useEffect(() => {
+    SetData()
+  }, [data]);
 
 
   useEffect(() => {
@@ -91,6 +95,7 @@ const Timeline = () => {
 
 
   const SetData = () => {
+     console.log('change')
 
     if (yearval !== '0') {
       console.log(data)
@@ -150,7 +155,7 @@ const Timeline = () => {
             <Option value="2020">2020</Option>
           </Select>
           {/* <div className="yearval">{yearval}</div> */}
-          <Button onClick={SetData} disabled={btndisable}>Get</Button>
+          {/* <Button onClick={SetData} disabled={btndisable}>Get</Button> */}
         </Row>
         <Divider></Divider>
         {
@@ -167,7 +172,7 @@ const Timeline = () => {
                 {/* <div className="chrono-icons">
                   {
                     items.map((v)=>{
-                      return(<div className="timelinebutton">{v.date.substring(5,7)}</div>)
+                      return (<div className="timelinebutton ">{v.date.substring(5,7)}</div>)
                     })
                   }
                     

@@ -17,11 +17,6 @@
     display: flex;
     justify-content: center;
 }
-.timeline_visual{
-
-    
-
-}
 
 .timeline-controls{
     display: flex;
@@ -37,8 +32,9 @@
     border-radius: 0% !important;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 
-    margin-bottom: 5vmax !important;
 }
+
+
 
 .ant-btn:hover{
     border-color: rgb(14, 0, 66) !important;
@@ -68,6 +64,7 @@
     -webkit-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0)) !important;
     height: 60vh !important;
 } 
+
 .card-description {
     width: 100% !important;
     padding: 20px !important;
@@ -91,11 +88,30 @@
     font-size: 1em;
 }
 
-.timeline-item-title{
+/* .timeline-item-title{
     background-color: rgba(0, 0, 0, 0) !important;
-    font-weight: 900 !important;
     width: 100% !important;
+
+    border: 2px black solid;
+
+    
 }
+.timeline-item-title::after{
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 20px 16px 0px 17.5px;
+	border-color: #140c0c transparent;
+	display: block;
+	width: 0;
+	z-index: 1;
+	top: 55px; 
+	left: 83px; 
+} */
+
+/* .css-3iqrge-TimelineTitleContainer{
+    margin-top: -1.5rem !important;
+} */
 
 .wait{
     width: 100%;
@@ -111,7 +127,7 @@
     font-weight: 500;
     padding: 2em;
     
-}
+} 
 
 .ant-spin-dot{
     width: 4em !important;
@@ -140,9 +156,5 @@
 }
 
 .timelinebutton:hover{
-    border: 2px rgb(149, 149, 184) solid;
-}
-
-.timelinebutton:focus{
     border: 2px rgb(149, 149, 184) solid;
 }
