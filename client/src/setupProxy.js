@@ -8,8 +8,7 @@ module.exports = function (app) {
 
         proxy({
 
-            target: 'http://13.209.70.51:5000/',
-
+            target: 'http://13.209.70.51:5000',
             changeOrigin: true,
 
         })
