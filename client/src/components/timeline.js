@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../style/timeline.css";
 import { Chrono } from "react-chrono";
-import { Row, Col,  Select, Button, Divider, Card, Typography,  Image, Spin } from "antd";
+import { Row, Col, Select, Button, Divider, Card, Typography, Image, Spin, Pagination } from "antd";
 import axios from 'axios';
 import instance from "../module/instance";
 
@@ -33,21 +33,26 @@ const Timeline = () => {
     return dateA > dateB ? 1 : -1;
   };
 
+
   const getData = async () => {
 
     let nums = []
+
+    let datas = []
+    let cinfos = []
 
     if (yearval === '2019') {
       setdata([])
 
 
       await instance.get('/cluster')
-        .then(response => { 
-          let ordered = []
-          ordered = response.data.clusterInfo
-          ordered.sort(date_ascending)
-          setcInfo(ordered)
-          ordered.map(x=>nums.push(x.cId))
+        .then(response => {
+          let ordered = [];
+          ordered = response.data.clusterInfo;
+          ordered.sort(date_ascending);
+          setcInfo(ordered);
+          ordered.map(x => nums.push(x.cId));
+          cinfos = ordered;
         }) // SUCCESS
         .catch(response => { console.log(response) }); // ERROR
 
@@ -55,7 +60,7 @@ const Timeline = () => {
       setdata([])
     }
 
-    console.log(nums)
+    console.log(cinfos)
 
     const results = nums.reduce((prevPrms, num) => (
       prevPrms.then(async prevRes => {
@@ -65,32 +70,32 @@ const Timeline = () => {
     ), Promise.resolve([]))
 
     results.then(response => {
-      console.log(response)
+
+      // temp=response
+      // temp.map((x)=>datas.push(x))
       setdata(response)
     })
-
-    // await instance.get('/news/?cId=' + i)
-    //   .then(response => { setdata(data => [...data, response.data.newsInfo]) }) // SUCCESS
-    //   .catch(response => { console.log(response) }); // ERROR
-
-
 
   }
 
 
   useEffect(() => {
     getData()
-    
   }, [yearval]);
+
+  useEffect(() => {
+    SetData()
+  }, [data]);
 
 
   useEffect(() => {
-    data.length>0? setbtndisable(false):setbtndisable(true)
+    data.length > 0 ? setbtndisable(false) : setbtndisable(true)
   }, [data]);
 
 
 
   const SetData = () => {
+    console.log('change')
 
     if (yearval !== '0') {
       console.log(data)
@@ -109,7 +114,7 @@ const Timeline = () => {
               title: temptitle,
               img: cloud,
               articles: data[i].data.newsInfo,
-              date:date
+              date: date
             };
 
             tempitem.push(temp);
@@ -150,7 +155,7 @@ const Timeline = () => {
             <Option value="2020">2020</Option>
           </Select>
           {/* <div className="yearval">{yearval}</div> */}
-          <Button onClick={SetData} disabled={btndisable}>Get</Button>
+          {/* <Button onClick={SetData} disabled={btndisable}>Get</Button> */}
         </Row>
         <Divider></Divider>
         {
@@ -163,61 +168,67 @@ const Timeline = () => {
                   allowDynamicUpdate
                   cardPositionHorizontal='TOP'
                   theme={{ primary: "rgba(0, 30, 165, 1)", secondary: "white" }}
-                >   
-                {/* <div className="chrono-icons">
-                  {
-                    items.map((v)=>{
-                      return(<div className="timelinebutton">{v.date.substring(5,7)}</div>)
-                    })
-                  }
-                    
-                </div> */}
+                >
+                  <div className="chrono-icons">
+                    {
+                      items.map((v) => {
+                        return (<div className="timelinebutton " onClick={() => console.log('clicked')}>{v.date.substring(5, 7)}</div>)
+                      })
+                    }
+
+                  </div>
                   {
                     items.map((v) => {
                       return (
 
                         <div key={v} className="Card">
-                          <div className="clusterhead">
+                          <Text className="clusterhead" mark>
                             {v.title}
+                          </Text>
+                          <div style={{
+                            marginTop:"2em"
+                          }}>
+                            <Text className="clusterdate">
+                              {v.date}
+                            </Text>
                           </div>
-                          <div className="clusterdate">
-                            {v.date}
-                          </div>
-                          <div>
-                            <Image width={400} src={'http://13.209.70.51:5000' + v.img}>
 
-                            </Image>
+                          <div>
+                            <Image width={400} src={'http://13.209.70.51:5000' + v.img} className="wordcloud" />
                           </div>
                           {v.articles.map((article) => {
                             return (
                               <>
 
                                 <Card key={article} hoverable
-                                  className="articleCard" style={
+                                  className="articleCard" /*style={
                                     article.img !== '/images/no-image.png' ?
                                       {
                                         backgroundImage: "url(" + article.img + ")",
-                                      } : { backgroundImage: "url('http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg')", }} onClick={() => OnHandleClick({ url: article.url })}  
-                                      
-                                      
-                                      
-                                      >
+                                      } : { backgroundImage: "url('http://www.the-pr.co.kr/news/photo/201607/14976_49069_3617.jpg')", }}*/ onClick={() => OnHandleClick({ url: article.url })}
+                                >
 
                                   <Row>
-                                    <Col span={12}>
+                                    <Col span={24}>
                                       <div>
                                         <Title style={{
-                                          fontSize:"2em"
+                                          fontSize: "2em"
                                         }}>
                                           {article.headline}
                                         </Title>
                                       </div>
-                                      <div>
+                                      <div className='articlecontent'>
+                                        <Text code>
+                                          {article.category}
+                                        </Text>
+                                        <Text code>
+                                          {article.press}
+                                        </Text>
                                         <Text>
                                           {article.text}...
                                         </Text>
-
                                       </div>
+
                                     </Col>
                                     <Col span={12}>
                                       <div>
@@ -228,7 +239,7 @@ const Timeline = () => {
                                 </Card>
                               </>)
                           })}
-
+                          <Pagination defaultCurrent={1} total={50} />
                         </div>
                       );
                     })
@@ -241,7 +252,7 @@ const Timeline = () => {
             :
             <div className="wait">
               INTIMES
-              <Spin size='large' className="spin"/>
+              <Spin size='large' className="spin" />
             </div>
         }
 
