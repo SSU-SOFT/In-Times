@@ -194,7 +194,7 @@ const Timeline = () => {
                           </div>
 
                           <div>
-                            <Image width={400} src={'http://13.209.70.51:5000' + v.img} className="wordcloud" />
+                            <Image width={1000} height={500} src={'http://13.209.70.51:5000' + v.img} className="wordcloud" />
                           </div>
                           {v.articles.map((article) => {
                             return (

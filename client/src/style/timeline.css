@@ -95,7 +95,7 @@
     font-size: 2em;
 }
 
-.css-7xkfgz-TitleWrapper{
+.ergoa4r0{
     font-size: 0.9em !important;
 }
 
@@ -150,7 +150,7 @@
     z-index: 4;
 }
 
-.css-3iqrge-TimelineTitleContainer{
+.e5foh871{
     margin-top: -2.1rem !important;
 } 
 
@@ -220,4 +220,8 @@
     text-align: left;
 
     flex-direction: column;
+}
+
+.wordcloud{
+    object-fit: cover;
 }
