@@ -1,5 +1,5 @@
 const proxy = require('http-proxy-middleware');
-const config = require('../config/config.json');
+const config = require('./config.json');
 module.exports = function (app) {
 
     app.use(

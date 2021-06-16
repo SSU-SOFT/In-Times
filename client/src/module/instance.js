@@ -1,5 +1,5 @@
 import axios from "axios";
-const config = require('../config/config.json');
+const config = require('../config.json');
 
 const instance = axios.create({
     baseURL: config.server+':5000',
