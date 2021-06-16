@@ -221,3 +221,7 @@
 
     flex-direction: column;
 }
+
+.wordcloud{
+    object-fit: cover;
+}
