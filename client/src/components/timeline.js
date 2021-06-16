@@ -60,7 +60,7 @@ const Timeline = () => {
       setdata([])
     }
 
-    console.log(cinfos)
+    // console.log(cinfos)
 
     const results = nums.reduce((prevPrms, num) => (
       prevPrms.then(async prevRes => {
@@ -98,8 +98,8 @@ const Timeline = () => {
     console.log('change')
 
     if (yearval !== '0') {
-      console.log(data)
-      console.log(cInfo)
+      // console.log(data)
+      // console.log(cInfo)
       setselected(true)
       if (data.length > 0) {
         let tempitem = [];
@@ -172,7 +172,7 @@ const Timeline = () => {
                   <div className="chrono-icons">
                     {
                       items.map((v) => {
-                        return (<div className="timelinebutton " onClick={() => console.log('clicked')}>{v.date.substring(5, 7)}</div>)
+                        return (<div className="timelinebutton ">{v.date.substring(5, 7)}</div>)
                       })
                     }
 
