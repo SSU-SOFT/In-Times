@@ -1,6 +1,8 @@
 .timeline{
     width: 100%;
     height: 100vh;
+
+    font-family: malgun;
 }
 
 .selectSection{
@@ -24,8 +26,11 @@
     border-radius: 0% !important; 
     background-color: white !important;
     box-shadow: none !important;
+    
 }
-
+.css-eh4k5x-TimelineMainWrapper.horizontal {
+    height: 10rem !important;
+}
 
 .css-8myp9a-TimelineNavButton {
     width: 10vmax !important;
@@ -33,6 +38,7 @@
     box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 
 }
+
 
 
 
@@ -46,14 +52,16 @@
 
 
     width: 95vw;
-    height: 20vh;
+    height: 30vh;
     margin-top: 10px;
     
     background-position: right;
-    background-position-y: 0;
+    background-position-y: 5;
     background-size: 50%;
     background-repeat: no-repeat;
     border-radius: 30px;
+
+    
 
     
 }
@@ -83,35 +91,71 @@
 }
 
 .clusterdate{
-    margin-top: 30px;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 2em;
 }
 
-/* .timeline-item-title{
-    background-color: rgba(0, 0, 0, 0) !important;
+.css-7xkfgz-TitleWrapper{
+    font-size: 0.9em !important;
+}
+
+.timeline-item-title{
+    
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(0, 7, 104) !important;
     width: 100% !important;
-
-    border: 2px black solid;
-
+    
+    border-radius: 10px !important;
+    height: 4em !important;
+    width: 13em !important;
+    transition:  background-color  0.3s ease-in-out;
     
 }
-.timeline-item-title::after{
-	content: '';
+
+.css-q2kzzt-Circle.active.using-icon {
+    border-color: brown;
+}
+
+.css-7xkfgz-TitleWrapper.active{
+    transition:  color  0.3s ease-in-out;
+    color: white !important;
+    background-color: rgb(0, 87, 250) !important;
+}
+.css-7xkfgz-TitleWrapper.active::after{
+
+    content: '';
 	position: absolute;
 	border-style: solid;
-	border-width: 20px 16px 0px 17.5px;
-	border-color: #140c0c transparent;
+	border-width: 15px 16px 0px 17.5px;
+	border-color: rgb(0, 87, 250) transparent;
 	display: block;
 	width: 0;
 	z-index: 1;
-	top: 55px; 
-	left: 83px; 
-} */
+	top: 50px; 
+	left: 40%; 
 
-/* .css-3iqrge-TimelineTitleContainer{
-    margin-top: -1.5rem !important;
-} */
+    z-index: 4;
+}
+
+.timeline-item-title::after{
+
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 15px 16px 0px 17.5px;
+	border-color: rgb(0, 7, 104) transparent;
+	display: block;
+	width: 0;
+	z-index: 1;
+	top: 50px; 
+	left: 40%; 
+
+    z-index: 4;
+}
+
+.css-3iqrge-TimelineTitleContainer{
+    margin-top: -2.1rem !important;
+} 
 
 .wait{
     width: 100%;
@@ -147,14 +191,36 @@
     width: 100%;
     font-size: 0.8em;
     font-weight: bold;
-    height: 1.5em;
+    height: 1.7em;
 
     padding-bottom: 2px;
 
-    border: 2px rgba(0, 30, 165, 1) solid;
     border-radius: 50%;
+
+    
+
+    z-index: 0;
 }
 
 .timelinebutton:hover{
-    border: 2px rgb(149, 149, 184) solid;
+    /* transition:  border 0.5s ease-in;
+    border: 1px rgb(0, 87, 250) solid; */
+}
+
+
+.css-q2kzzt-Circle.active.using-icon{
+    transition:  background-color 0.2s ease-in;
+    color: white;
+    background-color: rgb(0, 87, 250);
+    border-color: rgb(0, 87, 250) !important;
+}
+
+.articlecontent{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+
+    text-align: left;
+
+    flex-direction: column;
 }

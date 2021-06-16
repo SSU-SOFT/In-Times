@@ -12,6 +12,13 @@
     font-weight: 100;
 }
 
+@font-face {
+    font-family: 'malgun';
+    src: url('../assets/fonts/malgun.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 100;
+}
+
 .background {
     position: relative;
     width: 100vw;
