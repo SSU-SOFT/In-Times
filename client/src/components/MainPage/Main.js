@@ -10,12 +10,7 @@ const Main = (props) => {
   return (
     <>
       <TimeBar year={props.year}></TimeBar>
-      <Layout
-        style={{
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
+      <Layout>
         <Row>
           <Col span={8}>
             <SideMenu></SideMenu>

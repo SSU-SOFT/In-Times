@@ -43,14 +43,12 @@
     text-align: center;
     transform: translate(-50%, -50%);
 
+
+
 }
 
 #circle-orbit-container {
-    position: relative;
-    top: 25px;
-    left: 25px;
-    height: 300px;
-    width: 300px;
+
   }
 
 #outer-orbit {
@@ -84,13 +82,12 @@
     font-size: 6vmax;
     width: 5em;
     height: 5em;
-    /* border: 2px #4A437F dashed; */
     border-radius: 100%;
 
     animation: spin-right 30s linear infinite;
 }
 
- .outer-orbit-cirlces2 {
+.outer-orbit-cirlces2 {
     position: absolute;
     font-size: 1vmax;
     top: -3em;
@@ -100,9 +97,9 @@
 
     border-radius: 100%;
     background-color: #451297;
- }
+ } 
   
-  /* ---------- Animation ---------- */
+
 @keyframes spin-right {
     100% {
 
