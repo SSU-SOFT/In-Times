@@ -7,7 +7,6 @@ module.exports = function (app) {
         '/post',
 
         proxy({
-
             target: config.server+':5000',
             changeOrigin: true,
 
