@@ -6,11 +6,13 @@ import ArticleContent from "./ArticleContent";
 import { Row, Col } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
 
-const Main = (props) => {
+const Main = () => {
   return (
     <>
-      <TimeBar year={props.year}></TimeBar>
-      <Layout>
+      <TimeBar></TimeBar>
+      <Layout style={{
+        height:"100vh",
+      }}>
         <Row>
           <Col span={8}>
             <SideMenu></SideMenu>

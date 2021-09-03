@@ -1,4 +1,7 @@
 import React, { useRef,useState,useEffect } from "react";
+import { useRecoilState} from 'recoil';
+import { yearState } from "../../state/state";
+
 import "../../style/cover.css";
 import Main from "../MainPage/Main";
 
@@ -9,7 +12,7 @@ import Timeline from "../timeline";
 const Cover = () => {
   const section = useRef(null);
 
-  const [year,setYear]= useState(0);
+  const [ year, setYear ] = useRecoilState(yearState);
 
   const scrollTo = (ref) => {
     window.scroll({
@@ -18,9 +21,9 @@ const Cover = () => {
     });
   };
 
-  useEffect(()=>{
-    //console.log(year)
-  },[year]);
+  // useEffect(()=>{
+  //   //console.log(year)
+  // },[year]);
 
   const OnClickYear=(e)=>{
     console.log(e)
@@ -79,8 +82,6 @@ const Cover = () => {
         <div className="background"></div>
       </div>
       <div ref={section}>
-        {/* <Timeline></Timeline> */}
-        <Main year={year}></Main>
       </div>
     </>
   );
