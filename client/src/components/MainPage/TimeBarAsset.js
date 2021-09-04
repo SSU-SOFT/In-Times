@@ -47,7 +47,7 @@ const TimeBarAsset = (props) => {
 
   return (
     <>
-      <Popover content={content} placement="topLeft">
+      <Popover content={content} placement="bottomLeft">
         <div
           className={"TimeBarAsset " + (active ? "active" : "")}
           onClick={OnClickAsset}
