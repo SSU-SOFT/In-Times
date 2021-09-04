@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../style/TimeBar.css";
 
 import { useRecoilState } from "recoil";
-import { yearState } from "../../state/state";
-import { cIdState } from "../../state/state";
+import { yearState,cIdState,aIdState } from "../../state/state";
 
 import { Steps, Divider, Select } from "antd";
 
@@ -20,10 +19,13 @@ const getItems = () =>
 
 const TimeBar = () => {
   const [year, setYear] = useRecoilState(yearState);
+  const [cId, setCid] = useRecoilState(cIdState);
+  const [aId, setAid] = useRecoilState(aIdState);
+
   const [currentVal, setCurrentVal] = useState(0);
   const [cInfo, setcInfo] = useState([]);
   const [items, setItems] = useState([]);
-  const [cId, setCid] = useRecoilState(cIdState);
+  
   const { Option } = Select;
 
   const MakeItem = () => {
@@ -65,6 +67,9 @@ const TimeBar = () => {
         }); // ERROR
     } else if (year === 2020) {
       setcInfo([]);
+      setItems([]);
+      setCid(0);
+      setAid({});
       //setdata([])
     }
 
@@ -87,7 +92,7 @@ const TimeBar = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [year]);
 
   useEffect(() => {
     if(cInfo.length>0){
@@ -107,11 +112,6 @@ const TimeBar = () => {
   //     setPrevIndex(indexval);
   //     setIndexval(index);
   //   };
-
-  const onChange = (current) => {
-    console.log("onChange:", current);
-    setCurrentVal(current);
-  };
 
   const DropDownSelect = (value) => {
     setYear(value);

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "../../style/SideMenu.css";
 import { useRecoilState} from 'recoil';
 import { cIdState, yearState,aIdState } from "../../state/state";
-import {Pagination} from 'antd';
+import {Pagination,Card} from 'antd';
 
 import axios from "../../module/instance";
 
@@ -30,7 +30,12 @@ const SideMenu=()=>{
 
     useEffect(() => {
         setPage(1);
-        getNews(cId, page, 20);
+        if(cId!=0){
+            getNews(cId, page, 20);
+        }else{
+            setNews([])
+        }
+        
     }, [cId]);
 
     const getNews = async(cId, page, pageSize) => {
@@ -61,18 +66,16 @@ const SideMenu=()=>{
         <>
         <div className="SideMenu">
             <div style={{overflow:'auto', height:'700px'}}>
-                <ul>
                     {news.map((el)=>{
                         return (
-                        <li style={{backgroundColor:"lightgrey", margin:'10px'}} key={el.aId} onClick={()=>OnClickArticle(el)}>
+                        <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el)}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
                                 <div>{el.category}</div>
                                 <div>{el.press}</div>
                             </div>
                             <h4>{el.headline}</h4>
-                        </li>);
+                        </Card>);
                     })}
-                </ul>
             </div>
             <div style={{backgroundColor:'skyblue', display:'flex', justifyContent:'center'}}>
                 <Pagination simple defaultCurrent={1} total = {500} onChange={onChange} current={page}/>

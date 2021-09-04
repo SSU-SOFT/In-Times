@@ -32,7 +32,7 @@ const ArticleContent=()=>{
                 {aId.url}
             </div>
             <div>
-                <img src={aId.img} width="100%"></img>
+                <img src={aId.img} width="50%"></img>
             </div>
             
         </div>
