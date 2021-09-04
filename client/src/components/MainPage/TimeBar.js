@@ -1,69 +1,70 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../style/TimeBar.css";
 
 import { useRecoilState } from "recoil";
 import { yearState } from "../../state/state";
 import { cIdState } from "../../state/state";
 
-import { Steps, Divider } from "antd";
+import { Steps, Divider, Select } from "antd";
 
-import axios from 'axios';
+import axios from "axios";
 import instance from "../../module/instance";
 
 import TimeBarAsset from "./TimeBarAsset";
-
-
 
 const getItems = () =>
   Array(20)
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
 
-const { Step } = Steps;
 
 const TimeBar = () => {
   const [year, setYear] = useRecoilState(yearState);
   const [currentVal, setCurrentVal] = useState(0);
   const [cInfo, setcInfo] = useState([]);
-  const [items, setItems] =useState([]);
-  const [cId, setCid ] = useRecoilState(cIdState);
+  const [items, setItems] = useState([]);
+  const [cId, setCid] = useRecoilState(cIdState);
+  const { Option } = Select;
 
-    const MakeItem=()=>{
-        
-        if(cInfo.length>0){
-            setCid(cInfo[0].cId);
-            let temp=[];
-            for(let i=0;i<cInfo.length;i++){
-                let cnum=cInfo[i].cId;
-                temp.push(<TimeBarAsset cId={cnum}></TimeBarAsset>);
-            }
-            setItems(temp);
-        }
+  const MakeItem = () => {
+    if (cInfo.length > 0) {
+      let temp = [];
+      for (let i = 0; i < cInfo.length; i++) {
+        temp.push(<TimeBarAsset clusterInfo={cInfo[i]}></TimeBarAsset>);
+      }
+      setItems(temp);
+    } else {
+      setItems([]);
     }
-
+  };
 
   const getData = async () => {
+    let nums = [];
 
-    let nums = []
-
-    let datas = []
-    let cinfos = []
+    let datas = [];
+    let cinfos = [];
 
     if (year === 2019) {
       //setdata([])
 
-      await instance.get('/api/cluster')
-        .then(response => {
+      await instance
+        .get("/api/cluster")
+        .then((response) => {
+        console.log("Get Data!!!!!!!!");
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
+
+          setCid(ordered[0].cId);
           setcInfo(ordered);
           //ordered.map(x => nums.push(x.cId));
           //cinfos = ordered;
         }) // SUCCESS
-        .catch(response => { console.log(response) }); // ERROR
-
+        .catch((response) => {
+          console.log(response);
+        }); // ERROR
     } else if (year === 2020) {
+      setcInfo([]);
       //setdata([])
     }
 
@@ -82,36 +83,19 @@ const TimeBar = () => {
     //   // temp.map((x)=>datas.push(x))
     //   setdata(response)
     // })
-
-  }
-
-  useEffect(() => {
-    getData()
-  }, [year]);
-
+  };
 
   useEffect(() => {
-    console.log(cInfo);
-    MakeItem();
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if(cInfo.length>0){
+        console.log("cinfo:",cInfo);
+        MakeItem();
+    } 
   }, [cInfo]);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-  //   const EXAMPLE = [
-  //     {
-  //       data: "2018-03-22",
-  //       status: "status",
-  //       statusB: "Ready for Dev",
-  //       statusE: "In Progress",
-  //     },
-  //     {
-  //       data: "2018-03-23",
-  //       status: "status",
-  //       statusB: "In Progress",
-  //       statusE: "Done",
-  //     },
-  //   ];
 
   const date_ascending = (a, b) => {
     var dateA = new Date(a["date"]).getTime();
@@ -129,18 +113,15 @@ const TimeBar = () => {
     setCurrentVal(current);
   };
 
-  
+  const DropDownSelect = (value) => {
+    setYear(value);
+  };
 
   return (
     <>
       <div className="TimeBarMain">
-        <div>setYear</div>
         <div className="TimeBarStep">
-
-
-            {
-                items.map((v)=>v)
-            }
+          {items.map((v) => v)}
 
           {/* <Steps progressDot current={currentVal} onChange={onChange}>
             {items.map((v) => {
@@ -152,7 +133,12 @@ const TimeBar = () => {
             })}
           </Steps> */}
         </div>
-
+        <div className="SetYearArea">
+          <Select onChange={DropDownSelect} defaultValue={2019}>
+            <Option value={2019}>2019</Option>
+            <Option value={2020}>2020</Option>
+          </Select>
+        </div>
         {/* <Divider></Divider> */}
       </div>
     </>

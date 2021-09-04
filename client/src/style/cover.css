@@ -23,14 +23,16 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    filter: blur(8px);
+    filter: blur(10px) grayscale(50%);
     transform: scale(1.1);
     background-image: linear-gradient(0.25turn, rgb(11, 11, 61) 20%, rgb(5, 45, 46) 80%);
+    /* background-image: url("background/background.jpg"); */
     z-index: 0;
 }
 
 .CoverBox {
     overflow: hidden;
+    
 }
 
 .CoverContent {
@@ -42,9 +44,7 @@
 
     text-align: center;
     transform: translate(-50%, -50%);
-
-
-
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
 
 #circle-orbit-container {
@@ -58,10 +58,10 @@
     font-size: 6vmax;
     width: 5em;
     height: 5em;
-    border: 2px #4A437F dashed;
+    /* border: 4px #ffffff dashed; */
     border-radius: 100%;
 
-    animation: spin-right 15s linear infinite;
+    animation: spin-right 35s linear infinite;
 }
 
  .outer-orbit-cirlces1 {
@@ -71,9 +71,11 @@
     left: 0;
     width: 3em;
     height: 3em;
-
+    color: white;
     border-radius: 100%;
-    background-color: #00FFCA;
+    background-color: #0c042e;
+    border: 0.2em solid white;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  }
  #outer-orbit2 {
     position: absolute;
@@ -84,7 +86,7 @@
     height: 5em;
     border-radius: 100%;
 
-    animation: spin-right 30s linear infinite;
+    animation: spin-right 55s linear infinite;
 }
 
 .outer-orbit-cirlces2 {
@@ -94,11 +96,21 @@
     left: 0;
     width: 3em;
     height: 3em;
-
+    color: white;
     border-radius: 100%;
-    background-color: #451297;
+    border: 0.2em solid white;
+    background-color: #073a3d;
+
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  } 
-  
+.outer-orbit-cirlces1:hover{
+    background-color: #2d1499;
+    transition: background-color 0.5s;
+}
+.outer-orbit-cirlces2:hover{
+    background-color: #1f6f74;
+    transition: background-color 0.5s;
+}
 
 @keyframes spin-right {
     100% {
@@ -120,18 +132,18 @@
     height: 5em;
 }
 
- /* .circle::before {
+ .circle::before {
 
     position: absolute;
     content: '';
     width: 6em;
     height: 6em;
-    border-right: solid rgba(0, 30, 165, 0.562) 0.5rem;
+    border-right: solid rgba(9, 31, 128, 0.562) 0.5rem;
 
     border-radius: 60%;
 
     animation: animate 5s linear infinite;
-}  */
+} 
 
 .YearLink{
     width: 100%;

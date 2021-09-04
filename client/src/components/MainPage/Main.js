@@ -4,25 +4,25 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import SideMenu from "./SideMenu";
 import ArticleContent from "./ArticleContent";
 import { Row, Col } from "antd";
+import "../../style/Main.css";
 const { Header, Content, Footer, Sider } = Layout;
 
 const Main = () => {
   return (
     <>
-      <TimeBar></TimeBar>
-      <Layout style={{
-        height:"100vh",
-      }}>
-        <Row>
-          <Col span={8}>
-            <SideMenu></SideMenu>
-          </Col>
-          <Col span={16}>
-            <ArticleContent></ArticleContent>
-          </Col>
-        </Row>
+      <div className="Main">
+        <TimeBar></TimeBar>
+        <div>
+          <Row>
+            <Col span={8}>
+              <SideMenu></SideMenu>
+            </Col>
+            <Col span={16}>
+              <ArticleContent></ArticleContent>
+            </Col>
+          </Row>
 
-        {/* <Layout>
+          {/* <Layout>
           <Sider>
             <SideMenu></SideMenu>
           </Sider>
@@ -30,7 +30,8 @@ const Main = () => {
             <ArticleContent></ArticleContent>
           </Content>
         </Layout> */}
-      </Layout>
+        </div>
+      </div>
     </>
   );
 };
