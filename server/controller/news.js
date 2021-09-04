@@ -11,7 +11,7 @@ async function getNews (req, res) {
     const pageSize = req.query.pageSize?parseInt(req.query.pageSize):20;
     
     try {
-        let result = await db.query('select * from News WHERE cId = ? AND aId >= ? ORDER BY aId ASC limit ?;', [cId, page*pageSize, pageSize]);
+        let result = await db.query('SELECT * FROM News WHERE cId = ? ORDER BY aId ASC LIMIT ? OFFSET ?;', [cId, pageSize, page*pageSize]);
         let newsInfo = [];
         if(result.length > 0){
             result.map((val) =>{
