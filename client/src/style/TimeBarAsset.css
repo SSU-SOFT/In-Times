@@ -1,0 +1,20 @@
+.TimeBarAsset{
+
+    border-radius: 50%;
+    
+    border: 1px gray solid;
+
+    text-align: center;
+    font-size: 20px;
+
+    width: 30px;
+    height: 30px;
+    margin-bottom: 3px;
+}
+
+
+.TimeBarAsset:hover{
+    color: wheat;
+    border: 1px blue solid;
+    background-color: blue;
+}
