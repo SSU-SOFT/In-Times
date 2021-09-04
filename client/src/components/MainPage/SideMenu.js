@@ -1,28 +1,54 @@
 import React, {useState, useEffect} from 'react'
 import "../../style/SideMenu.css";
 import { useRecoilState} from 'recoil';
-import { cIdState } from "../../state/state";
-import { yearState } from "../../state/state";
+import { cIdState, yearState } from "../../state/state";
+import {Pagination} from 'antd';
+
 import axios from "../../module/instance";
 
 const SideMenu=()=>{
     const [year,setYear]=useRecoilState(yearState);
     const [cId, setCid ] = useRecoilState(cIdState);
     const [news, setNews] = useState([]);
-
-    useEffect(async() => {
+    const [page, setPage] = useState(1);
+    
+    useEffect(() => {
         console.log('컴포넌트가 화면에 나타남');
-        const news = await axios.get(`/api/news?cId=${1}`);
-        setNews(news.data.newsInfo);
+        getNews(cId);
         return () => {
           console.log('컴포넌트가 화면에서 사라짐');
         };
-    }, []);
+    }, [cId]);
+
+    useEffect(() => {
+        console.log('컴포넌트가 화면에 나타남');
+        getNews(cId, page, 20);
+        return () => {
+          console.log('컴포넌트가 화면에서 사라짐');
+        };
+    }, [page]);
+
+    const getNews = async(cId = 1, page = 1, pageSize = 20) => {
+        console.log(cId, page);
+        const result = await axios.get(`/api/news`, {
+            params : {
+                cId : cId,
+                page : page
+            }
+        })
+        setNews(result.data.newsInfo);
+        console.log(result.data.newsInfo)
+    }
+
+    const onChange = (page) => {
+        console.log(`Page #${page}`);
+        setPage(page)
+    }
 
     return(
         <>
-        <div style={{display:'flex'}}>
-            <div style={{flex:1, overflow:'auto', height:'700px'}}>
+        <div style={{}}>
+            <div style={{overflow:'auto', height:'700px'}}>
                 <ul>
                     {news.map((el)=>{
                         return (
@@ -35,6 +61,9 @@ const SideMenu=()=>{
                         </li>);
                     })}
                 </ul>
+            </div>
+            <div style={{backgroundColor:'skyblue', display:'flex', justifyContent:'center'}}>
+                <Pagination simple defaultCurrent={1} total = {500} onChange={onChange}/>
             </div>
         </div>
         </>
