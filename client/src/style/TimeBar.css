@@ -1,0 +1,23 @@
+.TimeBarMain{
+    position: relative;
+
+    background-color: white;
+}
+
+.TimeBarStep{
+    overflow-x: auto;
+    display: flex;
+    width: 100%;
+}
+
+
+.TimeBarStep::-webkit-scrollbar {
+    background: rgba(31, 44, 189, 0.5);
+    height: 3vh;
+    border-radius: 10px;
+}
+.TimeBarStep::-webkit-scrollbar-thumb{
+    background: rgb(30, 9, 151);
+    border-radius: 10px;
+}
+
