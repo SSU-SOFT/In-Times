@@ -28,7 +28,6 @@ const TimeBarAsset = (props) => {
 
   useEffect(() => {
     let month = clusterInfo.date.substring(5, 7);
-    console.log("month:", month);
     switch (month) {
       case "01":
         setColor("#DB937B");
@@ -86,8 +85,8 @@ const TimeBarAsset = (props) => {
       </div>
 
       <div className="CardContent">
-        {clusterInfo.Topic.map((v) => (
-          <div className="Topics">{v}</div>
+        {clusterInfo.Topic.map((v,i) => (
+          <div className="Topics" key={i}>{v}</div>
         ))}
       </div>
     </div>

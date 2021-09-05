@@ -32,7 +32,7 @@ const TimeBar = () => {
     if (cInfo.length > 0) {
       let temp = [];
       for (let i = 0; i < cInfo.length; i++) {
-        temp.push(<TimeBarAsset clusterInfo={cInfo[i]}></TimeBarAsset>);
+        temp.push(<TimeBarAsset clusterInfo={cInfo[i]} key={cInfo[i].cId}></TimeBarAsset>);
       }
       setItems(temp);
     } else {
@@ -47,12 +47,10 @@ const TimeBar = () => {
     let cinfos = [];
 
     if (year === 2019) {
-      //setdata([])
 
       await instance
         .get(`/api/cluster/${year}`)
         .then((response) => {
-          console.log("Get Data!!!!!!!!");
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
@@ -96,7 +94,7 @@ const TimeBar = () => {
 
   useEffect(() => {
     if(cInfo.length>0){
-        console.log("cinfo:",cInfo);
+
         MakeItem();
     } 
   }, [cInfo]);
@@ -127,7 +125,7 @@ const TimeBar = () => {
           </Select>
         </div>
         <div className="TimeBarStep">
-          {items.map((v) => v)}
+          {items.map((v,i) => v)}
 
           {/* <Steps progressDot current={currentVal} onChange={onChange}>
             {items.map((v) => {

@@ -12,16 +12,20 @@ const Main = () => {
     <>
       <div className="Main">
         <TimeBar></TimeBar>
-        <div>
-          <Row>
+
+          {/* <Row>
             <Col span={8}>
               <SideMenu></SideMenu>
             </Col>
             <Col span={16}>
               <ArticleContent></ArticleContent>
             </Col>
-          </Row>
-
+          </Row> */}
+          <div className="MainContent">
+            <SideMenu></SideMenu>
+            <ArticleContent></ArticleContent>
+          </div>
+          
           {/* <Layout>
           <Sider>
             <SideMenu></SideMenu>
@@ -30,7 +34,7 @@ const Main = () => {
             <ArticleContent></ArticleContent>
           </Content>
         </Layout> */}
-        </div>
+    
       </div>
     </>
   );

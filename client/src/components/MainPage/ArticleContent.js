@@ -3,8 +3,8 @@ import "../../style/ArticleContent.css";
 import { useRecoilState } from "recoil";
 import { cIdState, yearState, aIdState } from "../../state/state";
 import axios from "../../module/instance";
-import Tag from './Tag';
-import {Divider,} from 'antd';
+import Tag from "./Tag";
+import { Divider } from "antd";
 
 const ArticleContent = () => {
   const [year, setYear] = useRecoilState(yearState);
@@ -18,15 +18,15 @@ const ArticleContent = () => {
       await axios
         .get(`/api/news/${aId}`)
         .then((response) => {
-          console.log("aid", response.data.newsInfo[0]);
-          const news = response.data.newsInfo[0];
+          //console.log("aid", response.data.newsInfo[0]);
+          let news = response.data.newsInfo[0];
           news.category = news.category.split(",");
           setArticle(news);
         }) // SUCCESS
         .catch((response) => {
           console.log(response);
         }); // ERROR
-    }else{
+    } else {
       setArticle({});
     }
   };
@@ -40,28 +40,39 @@ const ArticleContent = () => {
       <div className="ArticleBox">
         <div>{article.date}</div>
         <div className="header">
-          <h3 style={{fontWeight:"bold", margin:'0px'}}>{article.press}</h3>
-          <div style={{display:"flex"}}>
-            {article.category.map((el, i)=> <Tag key={i}>{el}</Tag>)}
+          <h3 style={{ fontWeight: "bold", margin: "0px" }}>{article.press}</h3>
+          <div style={{ display: "flex" }}>
+            {article.category != null
+              ? article.category.map((el, i) => <Tag key={i}>{el}</Tag>)
+              : null}
           </div>
         </div>
         <div className="headline">
-          <h1>{article.headline}</h1>
-          <div style={{display:'flex', justifyContent:'flex-end'}}>
-            <a className="btn" href={article.url}>원문 기사 보러 가기 →</a>
+          <h1 style={{
+            fontWeight:"600"
+          }}>{article.headline}</h1>
+          <div style={{ display: "flex", justifyContent: "flex-end" }} onClick={()=>window.open(article.url,'_blank')}>
+            <div className="btn">
+              원문 기사 보러 가기 →
+            </div>
           </div>
         </div>
-        <Divider style={{
+        <Divider
+          style={{
             marginBottom: "2px",
             marginTop: "2px",
-          }}/>
+          }}
+        />
         <div className="content">
-          <div style={{display:"flex", justifyContent:'center'}}>
-            <img src={article.img}></img>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {article.img !="/images/no-image.png" ? (
+              <>
+                <img src={article.img}></img>
+              </>
+            ) : null}
           </div>
-          <p>{article.text}</p>
+          <div className="text">{article.text}</div>
         </div>
-        
       </div>
     </>
   );

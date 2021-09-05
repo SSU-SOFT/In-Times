@@ -19,6 +19,8 @@
     font-weight: 100;
 }
 
+
+
 .background {
     position: relative;
     width: 100vw;
@@ -27,7 +29,7 @@
     transform: scale(1.1);
     background-image: linear-gradient(0.25turn, rgb(11, 11, 61) 20%, rgb(5, 45, 46) 80%);
     /* background-image: url("background/background.jpg"); */
-    z-index: 0;
+   z-index: 0;
 }
 
 .CoverBox {
@@ -64,7 +66,10 @@
  .outer-orbit-cirlces1 {
     position: absolute;
     font-size: 1vmax;
+
     user-select:none;
+    pointer-events: all; 
+
     top: -3em;
     left: 0;
     width: 3em;
@@ -73,7 +78,7 @@
     border-radius: 100%;
     background-color: #0c042e;
     border: 0.2em solid white;
-    z-index: 2;
+
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  }
  #outer-orbit2 {
@@ -93,25 +98,28 @@
     font-size: 1vmax;
     top: -3em;
     left: 0;
+
     user-select:none;
+    pointer-events: all; 
+
     width: 3em;
     height: 3em;
     color: white;
     border-radius: 100%;
     border: 0.2em solid white;
     background-color: #073a3d;
-    z-index: 2;
+   
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  } 
 .outer-orbit-cirlces1:hover{
     background-color: #2d1499;
     transition: background-color 0.5s;
-    z-index: 2;
+
 }
 .outer-orbit-cirlces2:hover{
     background-color: #1f6f74;
     transition: background-color 0.5s;
-    z-index: 2;
+
 }
 
 @keyframes spin-right {
@@ -178,12 +186,27 @@
     font-family: Lato-Thin;
     font-weight: 100;
     backface-visibility: hidden;
+    user-select: none;
 }
 
 .logo_back{
+
+    font-family: irop;
     position: absolute;
+
+    font-size: 1vmax;
     backface-visibility: hidden;
     transform: rotateY(180deg);
+    user-select: none;
+}
+
+.logo_back #header{
+    font-size: 2vmax;
+    color: white;
+}
+
+.logo_back #content{
+    width: 20em;
 }
 
 

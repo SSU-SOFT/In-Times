@@ -6,16 +6,18 @@
     margin-right: 2em;
     background-color: white;
 
-    height: 730px;
+
+    height: 52em;
 
     overflow-y: scroll;
 
     padding: 30px;
 
-    font-family: "malgun";
-
+    font-family: irop;
    
+    width: 80%;
 
+    transition: all 1s ease;
 }
 
 .ArticleBox::-webkit-scrollbar {
@@ -35,22 +37,34 @@
 
 .ArticleBox .headline {
     display:block;
+    font-weight: 500;
 }
 
 .ArticleBox .btn {
     align-self:flex-end;
     background-color:#1C1F66;
     padding:5px 10px;
-    border-radius:25px;
+    border-radius:10px;
     margin-bottom:10px;
     color:#FFFFFF;
+    user-select:none;
+    transition: all 0.4s ease;
 }
 
-.ArticleBox a {
-    
+.ArticleBox .btn:hover{
+    background-color:#3236a1;
+    transition: all 0.4s ease;
 }
 
 .ArticleBox .content img{
     max-height:300px;
     margin: 20px;
 }
+
+.ArticleBox .content .text{
+    /* columns: 400px 3; */
+    column-count: 2;
+    column-gap: 2em;
+    
+}
+

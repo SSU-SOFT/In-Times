@@ -3,6 +3,10 @@
     margin-top: 3em;
     margin-left: 2em;
     background-color: white;
+    height: 52em;
+    width: 40%;
+    font-family: irop;
+    margin-bottom: 2em;
 }
 
 .SideMenuWrap::-webkit-scrollbar {
@@ -10,6 +14,8 @@
     
     width: 0.7em;
     border-radius: 10px;
+
+    
 }
 .SideMenuWrap::-webkit-scrollbar-thumb{
     background: #FFD324;
@@ -36,7 +42,7 @@
 
     padding: 0.2em 0.5em;
     margin-left: 0.3em;
-
+    user-select:none;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
