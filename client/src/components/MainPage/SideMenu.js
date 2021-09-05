@@ -52,8 +52,8 @@ const SideMenu=()=>{
         setPage(page)
     }
 
-    const OnClickArticle=(aid)=>{
-        setAid(aid);
+    const OnClickArticle=(aidnum)=>{
+        setAid(aidnum);
     }
 
     return(

@@ -5,9 +5,9 @@
     margin-left: 2em;
     margin-right: 2em;
 
+    background-color: rgba(0, 0, 0,0);
     
-    
-    background-color: #ffffff;
+   
 }
 
 .TimeBarStep{
@@ -20,7 +20,7 @@
     white-space: nowrap;
 
     background-image: url("background/HorizontalLine.png");
-    background-repeat:no-repeat;
+    background-repeat: repeat-x;
     background-size: auto;
 
    
