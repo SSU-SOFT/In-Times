@@ -6,7 +6,7 @@ import modules from './modules.js'
 
 // 게시글 조회
 async function getClusterAll (req, res) {
-    const year = req.params.year *= 1;
+    const year = parseInt(req.params.year);
     console.log(`${year}-01-01`, `${year+1}-01-01`);
     try {
         let result = await db.query(`SELECT * FROM Clusters WHERE date >= ? AND date < ?`, [`${year}-01-01`, `${year+1}-01-01`]);
@@ -39,8 +39,8 @@ async function getClusterAll (req, res) {
 }
 
 async function getClusterId (req, res) {
-    let cId = req.params.cId;
-    const year = req.params.year
+    const year = parseInt(req.params.year);
+    const cId = req.params.cId;
     console.log(year);
     try {
         let result = await db.query('select * from Clusters where cId = ?', [cId]);
