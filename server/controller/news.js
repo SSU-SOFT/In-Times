@@ -11,26 +11,31 @@ async function getNews (req, res) {
     const pageSize = req.query.pageSize?parseInt(req.query.pageSize):20;
     
     try {
-        let result = await db.query('select * from News WHERE cId = ? AND aId >= ? ORDER BY aId ASC limit ?;', [cId, page*pageSize, pageSize]);
+        const result = await db.query('SELECT * FROM News WHERE cId = ? ORDER BY aId ASC LIMIT ? OFFSET ?;', [cId, pageSize, page*pageSize]);
+        const cnt = await db.query('SELECT COUNT(aId) FROM News WHERE cId = ?', [cId]);
+        console.log(cnt);
         let newsInfo = [];
         if(result.length > 0){
             result.map((val) =>{
                 const date = modules.getFormatDate(val.date);
-                const text = val.text.toString().substring(0,200);
+                // const text = val.text.toString().substring(0,200);
                 
                 newsInfo.push({
                     aId : val.aId,
-                    cId : val.cId,
                     date : date,
                     category: val.category,
                     press: val.press,
-                    headline: val.headline,
-                    text: text,
-                    url: val.url,
-                    img: val.img==="[]"?"/images/no-image.png":val.img.replace(/\[|\]|\'| /g, "")
+                    headline: val.headline
+                    // text: text,
+                    // url: val.url,
+                    // img: val.img==="[]"?"/images/no-image.png":val.img.replace(/\[|\]|\'| /g, "")
                 });
             });
             const returnObj = {
+                cId : parseInt(cId),
+                currentPage : page+1,
+                pageSize : pageSize,
+                newsCount : cnt[0]["COUNT(aId)"],
                 newsInfo : newsInfo
             }
             res.status(httpStatus.OK).send(returnObj)
