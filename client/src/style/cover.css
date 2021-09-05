@@ -45,11 +45,8 @@
     text-align: center;
     transform: translate(-50%, -50%);
     text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+
 }
-
-#circle-orbit-container {
-
-  }
 
 #outer-orbit {
     position: absolute;
@@ -60,13 +57,14 @@
     height: 5em;
     /* border: 4px #ffffff dashed; */
     border-radius: 100%;
-
+    pointer-events: none; 
     animation: spin-right 35s linear infinite;
 }
 
  .outer-orbit-cirlces1 {
     position: absolute;
     font-size: 1vmax;
+    user-select:none;
     top: -3em;
     left: 0;
     width: 3em;
@@ -75,6 +73,7 @@
     border-radius: 100%;
     background-color: #0c042e;
     border: 0.2em solid white;
+    z-index: 2;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  }
  #outer-orbit2 {
@@ -85,7 +84,7 @@
     width: 5em;
     height: 5em;
     border-radius: 100%;
-
+    pointer-events: none; 
     animation: spin-right 55s linear infinite;
 }
 
@@ -94,22 +93,25 @@
     font-size: 1vmax;
     top: -3em;
     left: 0;
+    user-select:none;
     width: 3em;
     height: 3em;
     color: white;
     border-radius: 100%;
     border: 0.2em solid white;
     background-color: #073a3d;
-
+    z-index: 2;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  } 
 .outer-orbit-cirlces1:hover{
     background-color: #2d1499;
     transition: background-color 0.5s;
+    z-index: 2;
 }
 .outer-orbit-cirlces2:hover{
     background-color: #1f6f74;
     transition: background-color 0.5s;
+    z-index: 2;
 }
 
 @keyframes spin-right {
@@ -130,11 +132,23 @@
 
     width: 5em;
     height: 5em;
+
+       
+    transform-style: preserve-3d;
+    transition: all 0.4s ease;
+
+    z-index: 1;
 }
-
- .circle::before {
-
+.circle2{
     position: absolute;
+    font-size: 6vmax;
+    transform: translate(-50%, -50%);
+    top: -10%;
+    left: -10%;
+}
+ .circle2::after{
+    position: absolute;
+
     content: '';
     width: 6em;
     height: 6em;
@@ -143,7 +157,13 @@
     border-radius: 60%;
 
     animation: animate 5s linear infinite;
+
 } 
+
+.circle:hover{
+    transform: rotateY(180deg);
+}
+
 
 .YearLink{
     width: 100%;
@@ -157,6 +177,13 @@
 .logo {
     font-family: Lato-Thin;
     font-weight: 100;
+    backface-visibility: hidden;
+}
+
+.logo_back{
+    position: absolute;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
 }
 
 

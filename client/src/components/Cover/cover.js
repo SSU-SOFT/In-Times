@@ -1,5 +1,5 @@
-import React, { useRef,useState,useEffect } from "react";
-import { useRecoilState} from 'recoil';
+import React, { useRef, useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { yearState } from "../../state/state";
 
 import "../../style/cover.css";
@@ -12,7 +12,7 @@ import Timeline from "../timeline";
 const Cover = () => {
   const section = useRef(null);
 
-  const [ year, setYear ] = useRecoilState(yearState);
+  const [year, setYear] = useRecoilState(yearState);
 
   const scrollTo = (ref) => {
     window.scroll({
@@ -25,40 +25,45 @@ const Cover = () => {
   //   //console.log(year)
   // },[year]);
 
-  const OnClickYear=(e)=>{
-    console.log(e)
+  const OnClickYear = (e) => {
+    console.log(e);
     scrollTo(section);
     setYear(e);
-  }
+  };
 
   return (
     <>
       <div className="CoverBox">
         <div className="CoverContent">
-        <div id="circle-orbit-container">
-        <div className="circle">
+        <div className="circle2">
+          </div>
+          <div className="circle">
             <div className="logo">
               <div>INTIMES</div>
               <div className="sublogo">Korea News TImeLine Service</div>
             </div>
+            <div className="logo_back">
+              <div>Back</div>
+              <div className="sublogo">Back</div>
+            </div>
           </div>
+
           <div id="outer-orbit">
             <div className="outer-orbit-cirlces1">
-              <div className="YearLink" onClick={()=>OnClickYear(2019)}>
-                  2019
+              <div className="YearLink" onClick={() => OnClickYear(2019)}>
+                2019
+              </div>
+            </div>
+
+            <div id="outer-orbit2">
+              <div className="outer-orbit-cirlces2">
+                <div className="YearLink" onClick={() => OnClickYear(2020)}>
+                  2020
+                </div>
               </div>
             </div>
           </div>
 
-          <div id="outer-orbit2">
-            <div className="outer-orbit-cirlces2">
-              <div className="YearLink" onClick={()=>OnClickYear(2020)}>
-                  2020
-              </div>
-            </div>
-          </div>
-        </div>
-          
           {/* <div className="circle">
             <div className="logo">
               <div>INTIMES</div>
@@ -81,8 +86,7 @@ const Cover = () => {
         </div>
         <div className="background"></div>
       </div>
-      <div ref={section}>
-      </div>
+      <div ref={section}></div>
     </>
   );
 };

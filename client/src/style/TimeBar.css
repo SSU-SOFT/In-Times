@@ -6,13 +6,13 @@
     margin-right: 2em;
 
     background-color: rgba(0, 0, 0,0);
-    
-   
+  
 }
 
 .TimeBarStep{
     border-radius: 30px;
     width: 100%;
+
 
     /* background-color: #d8d8d8; */
     overflow-x: scroll;
@@ -25,6 +25,7 @@
     background-size: auto;
 
     padding-top: 1em;
+
 }
 
 
@@ -40,9 +41,5 @@
 }
 
 .SetYearArea{
-    position: absolute;
-
-    
-    left: 93vw;
-    top: 95vh;
+    float: right;
 }
