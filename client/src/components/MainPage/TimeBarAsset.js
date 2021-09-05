@@ -31,43 +31,40 @@ const TimeBarAsset = (props) => {
     console.log("month:", month);
     switch (month) {
       case "01":
-        setColor("red");
+        setColor("#DB937B");
         break;
       case "02":
-        setColor("orange");
+        setColor("#C098CD");
         break;
       case "03":
-        setColor("yellow");
+        setColor("#C1E8E5");
         break;
       case "04":
-        setColor("green");
+        setColor("#DF4954");
         break;
       case "05":
-        setColor("blue");
+        setColor("#7CB266");
         break;
       case "06":
-        setColor("#1c148c");
+        setColor("#FED758");
         break;
       case "07":
-        setColor("purple");
+        setColor("#E9B7C3");
         break;
       case "08":
-        setColor("red");
+        setColor("#F47F39");
         break;
       case "09":
-        setColor("red");
+        setColor("#5265B2");
         break;
       case "10":
-        setColor("red");
+        setColor("#9AB7D5");
         break;
       case "11":
-        setColor("red");
+        setColor("#C24A65");
         break;
       case "12":
-        setColor("red");
-        break;
-      case "01":
-        setColor("red");
+        setColor("#1B8092");
         break;
     }
   }, [cId]);
@@ -108,7 +105,7 @@ const TimeBarAsset = (props) => {
         >
           {/* <AiOutlineCaretUp/> */}
 
-          <div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div>
+          {/* <div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div> */}
         </div>
       </Popover>
     </>
