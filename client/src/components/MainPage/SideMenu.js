@@ -77,7 +77,7 @@ const SideMenu=()=>{
                     })}
             </div>
             <div style={{display:'flex', justifyContent:'center'}}>
-                <Pagination simple defaultCurrent={1} total = {20} onChange={onChange} current={page}/>
+                <Pagination simple defaultCurrent={1} total = {totalPage} onChange={onChange} current={page}/>
             </div>
         </div>
         </>

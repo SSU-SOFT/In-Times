@@ -69,7 +69,7 @@ const TimeBar = () => {
       setcInfo([]);
       setItems([]);
       setCid(0);
-      setAid({});
+      setAid(0);
       //setdata([])
     }
 
