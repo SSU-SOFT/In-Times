@@ -21,6 +21,8 @@ const ArticleContent = () => {
         .catch((response) => {
           console.log(response);
         }); // ERROR
+    }else{
+      setArticle({});
     }
   };
 
