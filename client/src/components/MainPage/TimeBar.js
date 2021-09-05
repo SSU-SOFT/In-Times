@@ -50,7 +50,7 @@ const TimeBar = () => {
       //setdata([])
 
       await instance
-        .get("/api/cluster")
+        .get(`/api/cluster/${year}`)
         .then((response) => {
         console.log("Get Data!!!!!!!!");
           let ordered = [];
@@ -120,6 +120,12 @@ const TimeBar = () => {
   return (
     <>
       <div className="TimeBarMain">
+      <div className="SetYearArea">
+          <Select onChange={DropDownSelect} defaultValue={2019}>
+            <Option value={2019}>2019</Option>
+            <Option value={2020}>2020</Option>
+          </Select>
+        </div>
         <div className="TimeBarStep">
           {items.map((v) => v)}
 
@@ -133,12 +139,7 @@ const TimeBar = () => {
             })}
           </Steps> */}
         </div>
-        <div className="SetYearArea">
-          <Select onChange={DropDownSelect} defaultValue={2019}>
-            <Option value={2019}>2019</Option>
-            <Option value={2020}>2020</Option>
-          </Select>
-        </div>
+    
         {/* <Divider></Divider> */}
       </div>
     </>

@@ -13,7 +13,7 @@ const ArticleContent=()=>{
     return(
         <>
         <div className="ArticleBox">
-            <div>
+            {/* <div>
                 {aId.date}
             </div>
             <div>
@@ -33,7 +33,7 @@ const ArticleContent=()=>{
             </div>
             <div>
                 <img src={aId.img} width="50%"></img>
-            </div>
+            </div> */}
             
         </div>
         
