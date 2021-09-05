@@ -3,8 +3,9 @@ import "../../style/SideMenu.css";
 import { useRecoilState} from 'recoil';
 import { cIdState, yearState,aIdState } from "../../state/state";
 import {Pagination,Card} from 'antd';
-
+import Tag from './Tag';
 import axios from "../../module/instance";
+
 
 const SideMenu=()=>{
     const [year,setYear]=useRecoilState(yearState);
@@ -65,14 +66,19 @@ const SideMenu=()=>{
         <div className="SideMenu">
             <div style={{overflow:'auto', height:'700px'}} className="SideMenuWrap">
                     {news.map((el)=>{
+                        const categories = el.category.split(",");
                         return (
                         <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el.aId)}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
                                 <div>{el.press}</div>
-                                <div>{el.category}</div>
+                                <div style={{display:'flex'}}>
+                                    {categories.map((el)=>{
+                                        return <Tag>{el}</Tag>
+                                    })}
+                                </div>
                             </div>
-                            <h4>{el.headline}</h4>
-                            {el.date}
+                            <h2 className="Headline">{el.headline}</h2>
+                            <div style={{textAlign:'right'}}>{el.date}</div>
                         </Card>);
                     })}
             </div>
