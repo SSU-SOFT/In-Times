@@ -36,7 +36,7 @@ const SideMenu=()=>{
         console.log(cId, page);
         await axios.get(`/api/news?cId=${cId}&page=${page}`)
         .then((response) => {
-            setAid(response.data.newsInfo[0])
+            setAid(response.data.newsInfo[0].aId)
             setNews(response.data.newsInfo);
           }) // SUCCESS
           .catch((response) => {
@@ -52,8 +52,8 @@ const SideMenu=()=>{
         setPage(page)
     }
 
-    const OnClickArticle=(el)=>{
-        setAid(el);
+    const OnClickArticle=(aid)=>{
+        setAid(aid);
     }
 
     return(
@@ -62,7 +62,7 @@ const SideMenu=()=>{
             <div style={{overflow:'auto', height:'700px'}}>
                     {news.map((el)=>{
                         return (
-                        <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el)}>
+                        <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el.aId)}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
                                 <div>{el.category}</div>
                                 <div>{el.press}</div>
