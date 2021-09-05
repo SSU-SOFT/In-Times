@@ -56,8 +56,8 @@ const SideMenu=()=>{
         setPage(page)
     }
 
-    const OnClickArticle=(el)=>{
-        setAid(el);
+    const OnClickArticle=(aid)=>{
+        setAid(aid);
     }
 
     return(
@@ -66,7 +66,7 @@ const SideMenu=()=>{
             <div style={{overflow:'auto', height:'700px'}}>
                     {news.map((el)=>{
                         return (
-                        <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el)}>
+                        <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el.aId)}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
                                 <div>{el.press}</div>
                                 <div>{el.category}</div>

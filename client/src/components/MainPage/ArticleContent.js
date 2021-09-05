@@ -1,38 +1,58 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import "../../style/ArticleContent.css";
 import { useRecoilState} from 'recoil';
 import { cIdState, yearState,aIdState } from "../../state/state";
-
+import axios from "../../module/instance";
 const ArticleContent=()=>{
 
     const [year,setYear]=useRecoilState(yearState);
     const [cId, setCid ] = useRecoilState(cIdState);
     const [aId, setAid ] = useRecoilState(aIdState);
 
+    const [article,setArticle]=useState({});
+
+    const getArticles = async() => {
+
+        await axios.get(`/api/news/${aId}`)
+        .then((response) => {
+            console.log("aid",response.data.newsInfo[0]);
+            setArticle(response.data.newsInfo[0])
+          }) // SUCCESS
+          .catch((response) => {
+            console.log(response);
+          }); // ERROR
+
+        // setNews(result.data.newsInfo);
+        // console.log(result.data.newsInfo)
+    }
+
+    useEffect(()=>{
+        getArticles();
+    },[aId]);
 
     return(
         <>
         <div className="ArticleBox">
             <div>
-                {aId.date}
+                {article.date}
             </div>
             <div>
-                {aId.category}
+                {article.category}
             </div>
             <div>
-                {aId.press}
+                {article.press}
             </div>
             <div>
-                {aId.headline}
+                {article.headline}
             </div>
             <div>
-                {aId.text}
+                {article.text}
             </div>
             <div>
-                {aId.url}
+                {article.url}
             </div>
             <div>
-                <img src={aId.img} width="50%"></img>
+                <img src={article.img} width="50%"></img>
             </div>
             
         </div>

@@ -13,5 +13,5 @@ export const cIdState = atom({
 
 export const aIdState = atom({
     key: 'aIdState',
-    default: {},
+    default:0,
 });
