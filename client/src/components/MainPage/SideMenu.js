@@ -10,9 +10,9 @@ const SideMenu=()=>{
     const [year,setYear]=useRecoilState(yearState);
     const [cId, setCid ] = useRecoilState(cIdState);
     const [aId, setAid ] = useRecoilState(aIdState);
-
     const [news, setNews] = useState([]);
     const [page, setPage] = useState(1);
+    const [totalPage , setTotalPage] = useState(0);
 
     useEffect(() => {
         console.log('컴포넌트가 화면에 나타남');
@@ -33,11 +33,15 @@ const SideMenu=()=>{
     }, [cId]);
 
     const getNews = async(cId, page, pageSize) => {
+        if(cId === 0)
+            return ;
         console.log(cId, page);
         await axios.get(`/api/news?cId=${cId}&page=${page}`)
         .then((response) => {
-            setAid(response.data.newsInfo[0].aId)
+            console.log(Math.ceil(response.data.newsCount/20));
+            setAid(response.data.newsInfo[0])
             setNews(response.data.newsInfo);
+            setTotalPage(Math.ceil(response.data.newsCount/20)*10);
           }) // SUCCESS
           .catch((response) => {
             console.log(response);
@@ -64,15 +68,16 @@ const SideMenu=()=>{
                         return (
                         <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el.aId)}>
                             <div style={{display:'flex', justifyContent:'space-between'}}>
-                                <div>{el.category}</div>
                                 <div>{el.press}</div>
+                                <div>{el.category}</div>
                             </div>
                             <h4>{el.headline}</h4>
+                            {el.date}
                         </Card>);
                     })}
             </div>
-            <div style={{backgroundColor:'skyblue', display:'flex', justifyContent:'center'}}>
-                <Pagination simple defaultCurrent={1} total = {500} onChange={onChange} current={page}/>
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <Pagination simple defaultCurrent={1} total = {totalPage} onChange={onChange} current={page}/>
             </div>
         </div>
         </>
