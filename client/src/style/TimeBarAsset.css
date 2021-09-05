@@ -4,7 +4,7 @@
     
 
     border-radius: 50%;
-    color: rgb(44, 44, 44);
+    color: rgb(255, 255, 255);
     background-color: rgb(255, 255, 255);
 
     text-align: center;
@@ -52,7 +52,9 @@
 .CardContent{
     font-family: "malgun";
     text-align: center;
+    width: 15em;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .AssetDate{

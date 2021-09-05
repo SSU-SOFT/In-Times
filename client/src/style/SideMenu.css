@@ -1,14 +1,30 @@
 .SideMenu{
-    border-radius: 30px;
+    border-radius: 10px;
     margin-top: 3em;
     margin-left: 2em;
     background-color: white;
 }
+
+.SideMenuWrap::-webkit-scrollbar {
+    background: #1C1F66;
+    
+    width: 0.7em;
+    border-radius: 10px;
+}
+.SideMenuWrap::-webkit-scrollbar-thumb{
+    background: #FFD324;
+    border-radius: 10px;
+}
+
+.SideMenuWrap{
+
+}
+
 
 .ArticleCard{
     background-color: "lightgrey";
     margin: 10px;
     border-radius: 20px;
 
-    
+    height: 10em;
 }

@@ -39,7 +39,7 @@ const SideMenu=()=>{
         await axios.get(`/api/news?cId=${cId}&page=${page}`)
         .then((response) => {
             console.log(Math.ceil(response.data.newsCount/20));
-            setAid(response.data.newsInfo[0])
+            setAid(response.data.newsInfo[0].aId)
             setNews(response.data.newsInfo);
             setTotalPage(Math.ceil(response.data.newsCount/20)*10);
           }) // SUCCESS
@@ -63,7 +63,7 @@ const SideMenu=()=>{
     return(
         <>
         <div className="SideMenu">
-            <div style={{overflow:'auto', height:'700px'}}>
+            <div style={{overflow:'auto', height:'700px'}} className="SideMenuWrap">
                     {news.map((el)=>{
                         return (
                         <Card hoverable className="ArticleCard" key={el.aId} onClick={()=>OnClickArticle(el.aId)}>

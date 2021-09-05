@@ -1,6 +1,6 @@
 .TimeBarMain{
 
-    border-radius: 30px;
+    border-radius: 10px;
 
     margin-left: 2em;
     margin-right: 2em;
@@ -21,6 +21,7 @@
 
     background-image: url("background/HorizontalLine.png");
     background-repeat: repeat-x;
+    background-position: center;
     background-size: auto;
 
    
@@ -28,12 +29,13 @@
 
 
 .TimeBarStep::-webkit-scrollbar {
-    background: #b0b5bd;
+    background: #1C1F66;
+    
     height: 1vh;
     border-radius: 10px;
 }
 .TimeBarStep::-webkit-scrollbar-thumb{
-    background: #696c70;
+    background: #FFD324;
     border-radius: 10px;
 }
 
