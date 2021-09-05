@@ -7,7 +7,7 @@ const color = ['#379392', "#4FB0C6",'#4F86C6','#FFBC42','#D81159', '#6C49B8', '#
 const Tag = ({children}) => {
     return (
       <>
-        <div className='Topics' style={{color:'white', backgroundColor:color[type.indexOf(children)]}}>
+        <div className='Tags' style={{color:'white', backgroundColor:color[type.indexOf(children)]}}>
           {children}
         </div>
       </>
