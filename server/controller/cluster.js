@@ -6,8 +6,10 @@ import modules from './modules.js'
 
 // 게시글 조회
 async function getClusterAll (req, res) {
+    const year = req.params.year *= 1;
+    console.log(`${year}-01-01`, `${year+1}-01-01`);
     try {
-        let result = await db.query('select * from Clusters;');
+        let result = await db.query(`SELECT * FROM Clusters WHERE date >= ? AND date < ?`, [`${year}-01-01`, `${year+1}-01-01`]);
         const clusterInfo = [];
 
         if(result.length > 0){
@@ -38,6 +40,8 @@ async function getClusterAll (req, res) {
 
 async function getClusterId (req, res) {
     let cId = req.params.cId;
+    const year = req.params.year
+    console.log(year);
     try {
         let result = await db.query('select * from Clusters where cId = ?', [cId]);
         const clusterInfo = [];
