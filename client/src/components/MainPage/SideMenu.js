@@ -13,12 +13,6 @@ const SideMenu=()=>{
 
     const [news, setNews] = useState([]);
     const [page, setPage] = useState(1);
-    
-    // useEffect(()=>{
-    //     getNews(cId, page, 20);
-    // },[])
-
-
 
     useEffect(() => {
         console.log('컴포넌트가 화면에 나타남');
@@ -40,7 +34,7 @@ const SideMenu=()=>{
 
     const getNews = async(cId, page, pageSize) => {
         console.log(cId, page);
-        await axios.get('/api/news?cId='+cId+'&page='+page)
+        await axios.get(`/api/news?cId=${cId}&page=${page}`)
         .then((response) => {
             setAid(response.data.newsInfo[0])
             setNews(response.data.newsInfo);

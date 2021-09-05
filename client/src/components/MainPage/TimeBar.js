@@ -50,9 +50,9 @@ const TimeBar = () => {
       //setdata([])
 
       await instance
-        .get("/api/cluster")
+        .get(`/api/cluster/${year}`)
         .then((response) => {
-        console.log("Get Data!!!!!!!!");
+          console.log("Get Data!!!!!!!!");
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
