@@ -1,18 +1,14 @@
 import React,{useState} from "react";
 import "../../style/Comment.css";
 import { Dropdown, Modal,Input } from "antd";
-
-const Comment = ({ children }) => {
-
+import instance from '../../module/instance'
+const Comment = ({ children, onUpdate }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isReviseModalVisible, setIsReviseModalVisible] = useState(false);
-  const [commentText, setCommentText] = useState("");
+  const [nickname, setNickname] = useState(children.nickname);
+  const [pw, setPW] = useState("");
+  const [commentText, setCommentText] = useState(children.comment);
   const { TextArea } = Input;
-
-  const handleChange = (e) => {
-    setCommentText(e.target.value);
-    console.log(e.target.value);
-  };
 
   const menu = (
     <div>
@@ -34,17 +30,40 @@ const Comment = ({ children }) => {
       </button>
     </div>
   );
-  const RevisehandleOK = () => {
+  const RevisehandleOK = async() => {
+    await instance.put(`/api/comment/${children.cmId}`, {
+        nickname : nickname,
+        pw : pw,
+        comment : commentText
+    }).then((res)=>{
+        onUpdate();
+        setNickname('');
+        setPW('');
+        setCommentText('');
+    }).catch((err)=>{
+        console.log(err);
+    })
     setIsReviseModalVisible(false);
   };
-  const DeletehandleOK = () => {
-    setIsDeleteModalVisible(false);
-  };
-
   const RevisehandleCancel = () => {
     setIsReviseModalVisible(false);
   };
 
+  const DeletehandleOK = async() => {
+    await instance.delete(`/api/comment/${children.cmId}`, {
+      data:{
+        pw : pw
+      }
+    }).then((res)=>{
+      onUpdate();
+      setNickname('');
+      setPW('');
+      setCommentText('');
+  }).catch((err)=>{
+      console.log(err);
+  })
+    setIsDeleteModalVisible(false);
+  };
   const DeletehandleCancel = () => {
     setIsDeleteModalVisible(false);
   };
@@ -77,7 +96,7 @@ const Comment = ({ children }) => {
           className="ModalRoot"
           title="삭제"
         >
-            삭제
+          <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
         </Modal>
         <Modal
           visible={isReviseModalVisible}
@@ -96,7 +115,9 @@ const Comment = ({ children }) => {
           title="수정"
         >
             <div className="CommentInputArea">
-            <TextArea onChange={handleChange} value={commentText}></TextArea>
+            <Input placeholder="닉네임을 입력하세요" value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/>
+              <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
+              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}}></TextArea>
           </div>
         </Modal>
     </div>

@@ -103,7 +103,7 @@ const ClusterInfo = () => {
         </div>
         <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }}>
           {comments.map((el, i) => {
-            return <Comment>{el}</Comment>;
+            return <Comment onUpdate={getComments}>{el}</Comment>;
           })}
         </Space>
         <div
