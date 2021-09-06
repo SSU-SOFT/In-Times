@@ -65,13 +65,13 @@ const ClusterInfo = () => {
       .then((res) => {
         console.log(res.data);
         setComments(res.data.comments);
-        setNickname('');
-        setPW('');
-        setCommentText('');
       })
       .catch((err) => {
         console.log(err);
       });
+    setNickname('');
+    setPW('');
+    setCommentText('');
   }
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const ClusterInfo = () => {
         </div>
         <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }}>
           {comments.map((el, i) => {
-            return <Comment onUpdate={getComments}>{el}</Comment>;
+            return <Comment onUpdate={getComments} key={i}>{el}</Comment>;
           })}
         </Space>
         <div

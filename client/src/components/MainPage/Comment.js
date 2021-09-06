@@ -1,14 +1,20 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import "../../style/Comment.css";
 import { Dropdown, Modal,Input } from "antd";
 import instance from '../../module/instance'
 const Comment = ({ children, onUpdate }) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isReviseModalVisible, setIsReviseModalVisible] = useState(false);
-  const [nickname, setNickname] = useState(children.nickname);
+  const [nickname, setNickname] = useState('');
   const [pw, setPW] = useState("");
-  const [commentText, setCommentText] = useState(children.comment);
+  const [commentText, setCommentText] = useState('');
   const { TextArea } = Input;
+
+
+  useEffect(()=>{
+    setNickname(children.nickname);
+    setCommentText(children.comment);
+  }, [children])
 
   const menu = (
     <div>
@@ -38,12 +44,10 @@ const Comment = ({ children, onUpdate }) => {
     }).then((res)=>{
       if (res.data.success){
         onUpdate();
-        setNickname('');
         setPW('');
-        setCommentText('');
       }
       else {
-        alert("err");
+        alert("비밀번호가 다릅니다.");
       }
     }).catch((err)=>{
         console.log(err);
@@ -62,12 +66,10 @@ const Comment = ({ children, onUpdate }) => {
     }).then((res)=>{
       if (res.data.success){
         onUpdate();
-        setNickname('');
         setPW('');
-        setCommentText('');
       }
       else {
-        alert("err");
+        alert("비밀번호가 다릅니다.");
       }
   }).catch((err)=>{
       console.log(err);
@@ -85,7 +87,7 @@ const Comment = ({ children, onUpdate }) => {
         <div className="Footer">
           <h3>By. {children.nickname}</h3>
           <Dropdown overlay={menu} placement={"topRight"} trigger={['click']}>
-            <button className="MemoMenu">Menu</button>
+            <button className="MemoMenu" onClick={()=>{console.log(children)}}>Menu</button>
           </Dropdown>
         </div>
       </div>
