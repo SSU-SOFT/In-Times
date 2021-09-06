@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes'
 async function getComment(req, res) {
     try {
         const cId = req.params.cId;
-        const comments = await db.query(`SELECT cmId, cId, nickname, comment from Comments where cId=?`, [cId]);
+        const comments = await db.query(`SELECT cmId, cId, nickname, comment from Comments where cId=? ORDER BY cmId DESC`, [cId]);
         res.status(httpStatus.OK).send({
             success : comments.length?true:false,
             comments: comments
@@ -19,7 +19,7 @@ async function getComment(req, res) {
 
 // 댓글 달기
 async function createComment(req, res) {
-    console.log('create');
+    console.log(req.body);
     try {
         const cId = req.params.cId;
         const encrypt = await security.security(req.body.pw);

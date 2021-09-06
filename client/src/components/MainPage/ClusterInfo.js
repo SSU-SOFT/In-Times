@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import comment_icon from "../../assets/icons/comment.png";
 import instance from "../../module/instance";
 import "../../style/ClusterInfo.css";
-import { Space, Input,Modal } from "antd";
+import { Space, Input, Modal } from "antd";
 import Comment from "./Comment";
 
 const config = require("../../config.json");
@@ -14,24 +14,29 @@ const ClusterInfo = () => {
   const [cinfo, setCinfo] = useState({});
   const [comments, setComments] = useState([]);
 
+  const [nickname, setNickname] = useState("");
+  const [pw, setPW] = useState("");
+  const [commentText, setCommentText] = useState("");
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-  
 
-  const [commentText, setCommentText] = useState("댓글을 입력해주세요.");
   const { TextArea } = Input;
 
-  const handleChange = (e) => {
-    setCommentText(e.target.value);
-    console.log(e.target.value);
-  };
-  const handleOk = () => {
+  const handleOk = async() => {
     setIsAddModalVisible(false);
-    setCommentText("댓글을 입력해주세요.");
+    await instance.post(`/api/comment/${cId}`, {
+      nickname : nickname,
+      pw : pw,
+      comment : commentText
+    }).then((res)=>{
+      console.log(res.data);
+      getComments();
+    }).catch((err)=>{
+      console.log(err);
+    })
   };
 
   const handleCancel = () => {
     setIsAddModalVisible(false);
-    setCommentText("댓글을 입력해주세요.");
   };
 
   const getData = async () => {
@@ -45,22 +50,30 @@ const ClusterInfo = () => {
         .catch((response) => {
           console.log(response);
         }); // ERROR
-      instance
-        .get(`/api/comment/${cId}`)
-        .then((res) => {
-          console.log(res.data);
-          setComments(res.data.comments);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      
     } else if (year === 2020) {
       setCinfo({});
     }
   };
 
+  const getComments = async() => {
+    await instance
+      .get(`/api/comment/${cId}`)
+      .then((res) => {
+        console.log(res.data);
+        setComments(res.data.comments);
+        setNickname('');
+        setPW('');
+        setCommentText('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     getData();
+    getComments();
   }, [cId]);
 
   return (
@@ -125,7 +138,9 @@ const ClusterInfo = () => {
           title="댓글 입력"
         >
           <div className="CommentInputArea">
-            <TextArea onChange={handleChange} value={commentText}></TextArea>
+              <Input placeholder="닉네임을 입력하세요" value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/>
+              <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
+              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}}></TextArea>
           </div>
         </Modal>
       </div>
