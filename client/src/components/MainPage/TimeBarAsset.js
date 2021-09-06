@@ -7,9 +7,10 @@ import { AiOutlineCaretUp } from "react-icons/ai";
 const config = require("../../config.json");
 
 const TimeBarAsset = (props) => {
-  const { clusterInfo } = props;
+  const { clusterInfo,firsts } = props;
 
   const { Meta } = Card;
+  const [isfirst,setIsfirst]=useState(false);
   const [cId, setCid] = useRecoilState(cIdState);
   const [active, setActive] = useState(false);
   const [color, setColor] = useState("white");
@@ -66,6 +67,14 @@ const TimeBarAsset = (props) => {
         setColor("#1B8092");
         break;
     }
+
+    if(firsts.indexOf(clusterInfo.cId)!=-1){
+      console.log("first:",firsts)
+      setIsfirst(true);
+    }else{
+      setIsfirst(false);
+    }
+
   }, [cId]);
 
   const content = (
@@ -96,14 +105,16 @@ const TimeBarAsset = (props) => {
     <>
       <Popover content={content} placement="bottomLeft">
         <div
-          className={"TimeBarAsset " + (active ? "active" : "")}
+          className={"TimeBarAsset " + (active ? "active" : "") + (isfirst ? " FirstAsset" : "")}
           onClick={OnClickAsset}
           style={{
             backgroundColor: color,
           }}
         >
           {/* <AiOutlineCaretUp/> */}
-
+          {
+            isfirst?<div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div>:null
+          }
           {/* <div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div> */}
         </div>
       </Popover>

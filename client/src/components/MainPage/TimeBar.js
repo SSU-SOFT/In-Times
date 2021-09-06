@@ -4,7 +4,7 @@ import "../../style/TimeBar.css";
 import { useRecoilState } from "recoil";
 import { yearState,cIdState,aIdState } from "../../state/state";
 
-import { Steps, Divider, Select } from "antd";
+import { Steps, Divider, Select,Space } from "antd";
 
 import axios from "axios";
 import instance from "../../module/instance";
@@ -25,6 +25,8 @@ const TimeBar = () => {
   const [currentVal, setCurrentVal] = useState(0);
   const [cInfo, setcInfo] = useState([]);
   const [items, setItems] = useState([]);
+
+  const [firstcId,setFirstcId]=useState([]);
   
   const { Option } = Select;
 
@@ -32,7 +34,7 @@ const TimeBar = () => {
     if (cInfo.length > 0) {
       let temp = [];
       for (let i = 0; i < cInfo.length; i++) {
-        temp.push(<TimeBarAsset clusterInfo={cInfo[i]} key={cInfo[i].cId}></TimeBarAsset>);
+        temp.push(<TimeBarAsset clusterInfo={cInfo[i]} key={cInfo[i].cId} firsts={firstcId} ></TimeBarAsset>);
       }
       setItems(temp);
     } else {
@@ -54,7 +56,19 @@ const TimeBar = () => {
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
+          console.log(ordered)
 
+          let tempdate="";
+          let tempfirst=[];
+
+          ordered.map((v)=>{
+            if(v.date.substring(5, 7)!=tempdate){
+              tempdate=v.date.substring(5, 7);
+              tempfirst.push(v.cId);
+            }
+          })
+
+          setFirstcId(tempfirst);
           setCid(ordered[0].cId);
           setcInfo(ordered);
           //ordered.map(x => nums.push(x.cId));
@@ -124,7 +138,7 @@ const TimeBar = () => {
             <Option value={2020}>2020</Option>
           </Select>
         </div>
-        <div className="TimeBarStep">
+        <Space className="TimeBarStep">
           {items.map((v,i) => v)}
 
           {/* <Steps progressDot current={currentVal} onChange={onChange}>
@@ -136,7 +150,7 @@ const TimeBar = () => {
               );
             })}
           </Steps> */}
-        </div>
+        </Space>
     
         {/* <Divider></Divider> */}
       </div>

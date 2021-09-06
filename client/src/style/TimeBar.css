@@ -11,7 +11,7 @@
 
 .TimeBarStep{
     border-radius: 30px;
-    width: 100%;
+ 
 
 
     /* background-color: #d8d8d8; */
@@ -26,6 +26,11 @@
 
     padding-top: 1em;
 
+    display:flex;
+    flex-direction: row;
+
+
+   width: 100%;
 }
 
 

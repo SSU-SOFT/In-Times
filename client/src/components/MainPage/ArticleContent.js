@@ -51,8 +51,8 @@ const ArticleContent = () => {
           <h1 style={{
             fontWeight:"600"
           }}>{article.headline}</h1>
-          <div style={{ display: "flex", justifyContent: "flex-end" }} onClick={()=>window.open(article.url,'_blank')}>
-            <div className="btn">
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div className="btn" onClick={()=>window.open(article.url,'_blank')}>
               원문 기사 보러 가기 →
             </div>
           </div>
