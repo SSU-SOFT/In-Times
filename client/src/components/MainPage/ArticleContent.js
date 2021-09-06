@@ -4,7 +4,8 @@ import { useRecoilState } from "recoil";
 import { cIdState, yearState, aIdState } from "../../state/state";
 import axios from "../../module/instance";
 import Tag from "./Tag";
-import { Divider } from "antd";
+import comment_icon from "../../assets/icons/comment.png";
+import {Modal, Divider } from "antd";
 
 const ArticleContent = () => {
   const [year, setYear] = useRecoilState(yearState);
@@ -12,6 +13,7 @@ const ArticleContent = () => {
   const [aId, setAid] = useRecoilState(aIdState);
 
   const [article, setArticle] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getArticles = async () => {
     if (aId != 0) {
@@ -29,6 +31,14 @@ const ArticleContent = () => {
     } else {
       setArticle({});
     }
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   useEffect(() => {
@@ -73,6 +83,14 @@ const ArticleContent = () => {
           </div>
           <div className="text">{article.text}</div>
         </div>
+        <div style={{position:"sticky", float:'right', bottom:'0', width:'50px', height:'50px'}} onClick={()=>{setIsModalVisible(true);}}>
+          <img src={comment_icon} width={50} height={50}/>
+        </div>
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </div>
     </>
   );

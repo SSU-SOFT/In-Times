@@ -25,7 +25,6 @@ const Main = () => {
             <SideMenu></SideMenu>
             <ArticleContent></ArticleContent>
           </div>
-          
           {/* <Layout>
           <Sider>
             <SideMenu></SideMenu>
@@ -34,8 +33,8 @@ const Main = () => {
             <ArticleContent></ArticleContent>
           </Content>
         </Layout> */}
-    
       </div>
+      
     </>
   );
 };
