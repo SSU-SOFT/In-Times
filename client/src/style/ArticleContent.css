@@ -81,34 +81,3 @@
    transition: all 0.2s ease;
 }
 
-
-
-.ModealFooter{
-    display: flex;
-    justify-content: flex-end;
-    color: white;
-
-    font-family: "irop";
-}
-
-.ModealFooter .button{
-
-    width: 3em;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    margin-left: 1em;
-
-    padding: 0.2em;
-    border-radius: 10px;
-    background-color: #100ea1;
-
-    user-select: none;
-}
-
-.ModealFooter .button:hover{
-    transition:  all 0.3s ease;
-    background-color: #1714ce;
-}
