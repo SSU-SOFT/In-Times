@@ -112,7 +112,7 @@ const ClusterInfo = () => {
           </div>
         </div>
 
-        <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }}>
+        <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }} className="Memos">
           {comments.map((el, i) => {
             return <Comment onUpdate={getComments} key={i}>{el}</Comment>;
           })}
@@ -129,7 +129,7 @@ const ClusterInfo = () => {
             setIsAddModalVisible(true)
           }}
         >
-          <img src={comment_icon} width={50} height={50} />
+          <img src={comment_icon} width={50} height={50} className="CommentButton"/>
         </div>
 
         <Modal

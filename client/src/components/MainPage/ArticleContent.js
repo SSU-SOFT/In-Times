@@ -5,7 +5,7 @@ import { cIdState, yearState, aIdState, InfoState } from "../../state/state";
 import axios from "../../module/instance";
 import Tag from "./Tag";
 import comment_icon from "../../assets/icons/comment.png";
-import { Modal, Divider, Button,Input  } from "antd";
+import { Modal, Divider, Button  } from "antd";
 import ClusterInfo from "./ClusterInfo";
 import { AiFillCloseCircle } from "react-icons/ai";
 
@@ -16,17 +16,8 @@ const ArticleContent = () => {
   const [isInfo, setIsinfo] = useRecoilState(InfoState);
 
   const [article, setArticle] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false);
+ 
 
-
-  const [commentText,setCommentText]=useState("댓글을 입력해주세요.");
-
-  const { TextArea } = Input;
-
-  const handleChange = e => {
-    setCommentText(e.target.value);
-    console.log(e.target.value)
-  };
 
   const getArticles = async () => {
     if (aId != 0) {
@@ -46,15 +37,7 @@ const ArticleContent = () => {
     }
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-    setCommentText("댓글을 입력해주세요.");
-  };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setCommentText("댓글을 입력해주세요.");
-  };
 
   useEffect(() => {
     getArticles();
@@ -63,6 +46,7 @@ const ArticleContent = () => {
   const OnCloseClick = () => {
     setIsinfo(true);
   };
+
 
   return (
     <>
@@ -124,22 +108,6 @@ const ArticleContent = () => {
           </div>
         )}
 
-          {/* <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={
-            <div className="ModealFooter">
-             <div onClick={handleCancel} className="button">
-            취소
-             </div>
-            <div onClick={handleOk} className="button">
-              확인
-            </div>
-            </div>
-            
-          } className="ModalRoot" title="댓글 입력">
-            <div className="CommentInputArea">
-              <TextArea onChange={handleChange} value={commentText}></TextArea>
-            </div>
-            
-          </Modal> */}
 
       </div>
     </>
