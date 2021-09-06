@@ -123,20 +123,7 @@ const ArticleContent = () => {
             </div>
           </div>
         )}
-        <div
-          style={{
-            position: "sticky",
-            float: "right",
-            bottom: "0",
-            width: "50px",
-            height: "50px",
-          }}
-          onClick={() => {
-            setIsModalVisible(true);
-          }}
-        >
-          <img src={comment_icon} width={50} height={50} />
-        </div>
+
           {/* <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={
             <div className="ModealFooter">
              <div onClick={handleCancel} className="button">
