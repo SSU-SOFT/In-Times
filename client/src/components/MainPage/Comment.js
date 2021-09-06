@@ -36,10 +36,15 @@ const Comment = ({ children, onUpdate }) => {
         pw : pw,
         comment : commentText
     }).then((res)=>{
+      if (res.data.success){
         onUpdate();
         setNickname('');
         setPW('');
         setCommentText('');
+      }
+      else {
+        alert("err");
+      }
     }).catch((err)=>{
         console.log(err);
     })
@@ -55,10 +60,15 @@ const Comment = ({ children, onUpdate }) => {
         pw : pw
       }
     }).then((res)=>{
-      onUpdate();
-      setNickname('');
-      setPW('');
-      setCommentText('');
+      if (res.data.success){
+        onUpdate();
+        setNickname('');
+        setPW('');
+        setCommentText('');
+      }
+      else {
+        alert("err");
+      }
   }).catch((err)=>{
       console.log(err);
   })

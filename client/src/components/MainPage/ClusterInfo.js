@@ -29,7 +29,10 @@ const ClusterInfo = () => {
       comment : commentText
     }).then((res)=>{
       console.log(res.data);
-      getComments();
+      if(res.data.success)
+        getComments();
+      else
+        alert("err")
     }).catch((err)=>{
       console.log(err);
     })
