@@ -15,3 +15,8 @@ export const aIdState = atom({
     key: 'aIdState',
     default:0,
 });
+
+export const InfoState = atom({
+    key: 'InfoState',
+    default:true,
+});

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../../style/SideMenu.css";
 import { useRecoilState } from "recoil";
-import { cIdState, yearState, aIdState } from "../../state/state";
+import { cIdState, yearState, aIdState,InfoState  } from "../../state/state";
 import { Pagination, Card } from "antd";
 import Tag from "./Tag";
 import axios from "../../module/instance";
@@ -10,6 +10,9 @@ const SideMenu = () => {
   const [year, setYear] = useRecoilState(yearState);
   const [cId, setCid] = useRecoilState(cIdState);
   const [aId, setAid] = useRecoilState(aIdState);
+  const [isInfo, setIsinfo] = useRecoilState(InfoState);
+
+
   const [news, setNews] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -60,6 +63,7 @@ const SideMenu = () => {
 
   const OnClickArticle = (aidnum) => {
     setAid(aidnum);
+    setIsinfo(false);
   };
 
   return (

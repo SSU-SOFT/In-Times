@@ -43,11 +43,6 @@ const TimeBar = () => {
   };
 
   const getData = async () => {
-    let nums = [];
-
-    let datas = [];
-    let cinfos = [];
-
     if (year === 2019) {
 
       await instance

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../style/TimeBarAsset.css";
-import { cIdState } from "../../state/state";
-import { useRecoilState } from "recoil";
+import { cIdState,InfoState } from "../../state/state";
+import { useRecoilState} from "recoil";
 import { Popover, Divider, Card } from "antd";
 import { AiOutlineCaretUp } from "react-icons/ai";
 const config = require("../../config.json");
@@ -12,11 +12,16 @@ const TimeBarAsset = (props) => {
   const { Meta } = Card;
   const [isfirst,setIsfirst]=useState(false);
   const [cId, setCid] = useRecoilState(cIdState);
+  const [isInfo, setIsinfo] = useRecoilState(InfoState);
+
+
   const [active, setActive] = useState(false);
   const [color, setColor] = useState("white");
+ 
 
   const OnClickAsset = () => {
     setCid(clusterInfo.cId);
+    setIsinfo(true);
   };
 
   useEffect(() => {

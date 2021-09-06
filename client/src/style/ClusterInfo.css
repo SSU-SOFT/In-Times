@@ -1,0 +1,23 @@
+.ClusterInfoMain{
+    height: 100%;
+}
+
+
+.InfoContent{
+    font-family: "irop";
+    text-align: center;
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.cinfoImg{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+
+.cinfocontent img{
+    max-height:500px;
+}
