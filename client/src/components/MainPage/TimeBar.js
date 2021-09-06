@@ -97,6 +97,7 @@ const TimeBar = () => {
     // })
   };
 
+  
   useEffect(() => {
     getData();
   }, [year]);

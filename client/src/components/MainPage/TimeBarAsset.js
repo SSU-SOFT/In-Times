@@ -18,10 +18,14 @@ const TimeBarAsset = (props) => {
   const [active, setActive] = useState(false);
   const [color, setColor] = useState("white");
  
+  const handleScroll = () => {
+    document.getElementById("SideRoot").scrollTo(0, 0);
+  };
 
   const OnClickAsset = () => {
     setCid(clusterInfo.cId);
     setIsinfo(true);
+    handleScroll();
   };
 
   useEffect(() => {

@@ -15,13 +15,21 @@
 
 .Main{
     height:100%;
-    background-image: linear-gradient(0.25turn, rgb(8, 8, 51) 20%, rgb(3, 38, 39) 80%);
+    
+    
+   
+    background-image: linear-gradient(-0.75turn, rgb(4, 4, 37) 10%, rgb(3, 32, 32) 90%);
+
+  
 }
 
 .MainContent{
     display: flex;
     flex-grow: 0;
+  
 }
+
+
 
 .col-xs-1,
 .col-sm-1,

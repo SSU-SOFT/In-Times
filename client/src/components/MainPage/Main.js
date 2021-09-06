@@ -11,28 +11,15 @@ const Main = () => {
   return (
     <>
       <div className="Main">
+
         <TimeBar></TimeBar>
 
-          {/* <Row>
-            <Col span={8}>
-              <SideMenu></SideMenu>
-            </Col>
-            <Col span={16}>
-              <ArticleContent></ArticleContent>
-            </Col>
-          </Row> */}
           <div className="MainContent">
             <SideMenu></SideMenu>
             <ArticleContent></ArticleContent>
           </div>
-          {/* <Layout>
-          <Sider>
-            <SideMenu></SideMenu>
-          </Sider>
-          <Content>
-            <ArticleContent></ArticleContent>
-          </Content>
-        </Layout> */}
+
+        
       </div>
       
     </>

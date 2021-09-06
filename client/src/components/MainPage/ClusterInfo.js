@@ -23,6 +23,7 @@ const ClusterInfo = () => {
           console.log(response);
         }); // ERROR
     } else if (year === 2020) {
+      setCinfo({});
     }
   };
 
@@ -38,7 +39,10 @@ const ClusterInfo = () => {
 
         <div className="cinfocontent">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src={config.server + ":5000" + cinfo.img} className="cinfoImg"></img>
+            {
+                cinfo.img!=null?<img src={config.server + ":5000" + cinfo.img} className="cinfoImg"></img>:null
+            }
+            
           </div>
         </div>
         <div className="InfoContent">

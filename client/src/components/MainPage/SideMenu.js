@@ -101,7 +101,7 @@ const SideMenu = () => {
             );
           })}
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center"}}>
           <Pagination
             simple
             defaultCurrent={1}

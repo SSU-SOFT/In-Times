@@ -5,8 +5,9 @@ import { cIdState, yearState, aIdState, InfoState } from "../../state/state";
 import axios from "../../module/instance";
 import Tag from "./Tag";
 import comment_icon from "../../assets/icons/comment.png";
-import { Modal, Divider } from "antd";
+import { Modal, Divider, Button,Input  } from "antd";
 import ClusterInfo from "./ClusterInfo";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const ArticleContent = () => {
   const [year, setYear] = useRecoilState(yearState);
@@ -16,6 +17,16 @@ const ArticleContent = () => {
 
   const [article, setArticle] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+  const [commentText,setCommentText]=useState("댓글을 입력해주세요.");
+
+  const { TextArea } = Input;
+
+  const handleChange = e => {
+    setCommentText(e.target.value);
+    console.log(e.target.value)
+  };
 
   const getArticles = async () => {
     if (aId != 0) {
@@ -35,17 +46,23 @@ const ArticleContent = () => {
     }
   };
 
-  // const handleOk = () => {
-  //   setIsModalVisible(false);
-  // };
+  const handleOk = () => {
+    setIsModalVisible(false);
+    setCommentText("댓글을 입력해주세요.");
+  };
 
-  // const handleCancel = () => {
-  //   setIsModalVisible(false);
-  // };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setCommentText("댓글을 입력해주세요.");
+  };
 
   useEffect(() => {
     getArticles();
   }, [aId]);
+
+  const OnCloseClick = () => {
+    setIsinfo(true);
+  };
 
   return (
     <>
@@ -54,7 +71,13 @@ const ArticleContent = () => {
           <ClusterInfo></ClusterInfo>
         ) : (
           <div>
-            <div>{article.date}</div>
+            <div className="Xbutton">
+              <div onClick={OnCloseClick}>
+                <AiFillCloseCircle />
+              </div>
+            </div>
+
+            <div >{article.date}</div>
             <div className="header">
               <h3 style={{ fontWeight: "bold", margin: "0px" }}>
                 {article.press}
@@ -114,6 +137,23 @@ const ArticleContent = () => {
         >
           <img src={comment_icon} width={50} height={50} />
         </div>
+          {/* <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={
+            <div className="ModealFooter">
+             <div onClick={handleCancel} className="button">
+            취소
+             </div>
+            <div onClick={handleOk} className="button">
+              확인
+            </div>
+            </div>
+            
+          } className="ModalRoot" title="댓글 입력">
+            <div className="CommentInputArea">
+              <TextArea onChange={handleChange} value={commentText}></TextArea>
+            </div>
+            
+          </Modal> */}
+
       </div>
     </>
   );
