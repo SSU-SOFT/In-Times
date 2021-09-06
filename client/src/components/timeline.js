@@ -95,7 +95,7 @@ const Timeline = () => {
 
 
   const SetData = () => {
-    console.log('change')
+    //console.log('change')
 
     if (yearval !== '0') {
       // console.log(data)

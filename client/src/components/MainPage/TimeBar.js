@@ -51,7 +51,7 @@ const TimeBar = () => {
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
-          console.log(ordered)
+          //console.log(ordered)
 
           let tempdate="";
           let tempfirst=[];

@@ -1,16 +1,28 @@
+@font-face {
+    font-family: 'garam';
+    src: url('../assets/fonts/garam.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 100;
+}
+
 .Comment{
     background-image: url('background/memo.png');
    
     background-size: cover;
-
+    font-family: "garam";
+    font-weight: 600;
 }
 
 .Comment .Container {
+    font-size: 18px;
     width:300px;
     height:300px;
     /* background-color:#FFD324; */
     margin:10px;
-    padding:10px;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
     display:flex;
     flex-direction:column;
 }
@@ -29,9 +41,11 @@
 }
 
 .MemoMenu{
-    
-    border-radius: 30px;
+    font-family: 'garam';
+    border-radius: 20px;
+    border: 2px solid rgba(80, 80, 80,0.5);
     background-color: #FFF27A;
+    font-weight: 600;
 }
 
 .MemoMenu:hover{

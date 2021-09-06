@@ -129,7 +129,7 @@ const Comment = ({ children, onUpdate }) => {
             <div className="CommentInputArea">
             <Input placeholder="닉네임을 입력하세요" value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/>
               <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
-              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}}></TextArea>
+              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}} maxLength={200}></TextArea>
           </div>
         </Modal>
     </div>

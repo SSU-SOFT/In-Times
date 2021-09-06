@@ -78,7 +78,7 @@ const TimeBarAsset = (props) => {
     }
 
     if(firsts.indexOf(clusterInfo.cId)!=-1){
-      console.log("first:",firsts)
+      //console.log("first:",firsts)
       setIsfirst(true);
     }else{
       setIsfirst(false);

@@ -26,7 +26,7 @@ const Timeline = () => {
   };
 
   const DropDownSelect = (value) => {
-    console.log(value);
+    //console.log(value);
     setyearval(value);
   };
 

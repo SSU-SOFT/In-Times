@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import comment_icon from "../../assets/icons/comment.png";
 import instance from "../../module/instance";
 import "../../style/ClusterInfo.css";
-import { Space, Input, Modal } from "antd";
+import { Space, Input, Modal,Divider } from "antd";
 import Comment from "./Comment";
 
 const config = require("../../config.json");
@@ -28,7 +28,7 @@ const ClusterInfo = () => {
       pw : pw,
       comment : commentText
     }).then((res)=>{
-      console.log(res.data);
+      //console.log(res.data);
       if(res.data.success)
         getComments();
       else
@@ -47,7 +47,7 @@ const ClusterInfo = () => {
       instance
         .get(`/api/cluster/${year}/${cId}`)
         .then((response) => {
-          console.log(response.data.clusterInfo[0]);
+          //console.log(response.data.clusterInfo[0]);
           setCinfo(response.data.clusterInfo[0]);
         }) // SUCCESS
         .catch((response) => {
@@ -63,7 +63,7 @@ const ClusterInfo = () => {
     await instance
       .get(`/api/comment/${cId}`)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setComments(res.data.comments);
       })
       .catch((err) => {
@@ -82,9 +82,25 @@ const ClusterInfo = () => {
   return (
     <>
       <div className="ClusterInfoMain">
-        <div>{cinfo.count}</div>
-        <div>{cinfo.date}</div>
-
+        {/* <div>{cinfo.count}</div> */}
+        <div style={{
+          fontSize:"20px"
+        }}>{cinfo.date}</div>
+        <Divider
+              style={{
+                marginBottom: "10px",
+                marginTop: "2px",
+              }}
+            />
+        {/* <div className="InfoContent">
+          {cinfo.Topic != null
+            ? cinfo.Topic.map((v, i) => (
+                <div className="Topics" key={i}>
+                  {v}
+                </div>
+              ))
+            : null}
+        </div> */}
         <div className="cinfocontent">
           <div style={{ display: "flex", justifyContent: "center" }}>
             {cinfo.img != null ? (
@@ -95,15 +111,7 @@ const ClusterInfo = () => {
             ) : null}
           </div>
         </div>
-        <div className="InfoContent">
-          {cinfo.Topic != null
-            ? cinfo.Topic.map((v, i) => (
-                <div className="Topics" key={i}>
-                  {v}
-                </div>
-              ))
-            : null}
-        </div>
+
         <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }}>
           {comments.map((el, i) => {
             return <Comment onUpdate={getComments} key={i}>{el}</Comment>;
@@ -143,7 +151,7 @@ const ClusterInfo = () => {
           <div className="CommentInputArea">
               <Input placeholder="닉네임을 입력하세요" value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/>
               <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
-              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}}></TextArea>
+              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}} maxLength={200}></TextArea>
           </div>
         </Modal>
       </div>

@@ -26,7 +26,7 @@ const Cover = () => {
   // },[year]);
 
   const OnClickYear = (e) => {
-    console.log(e);
+    //console.log(e);
     scrollTo(section);
     setYear(e);
   };
