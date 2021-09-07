@@ -5,7 +5,6 @@ import modules from './modules.js'
 
 // 게시글 조회
 async function getNews (req, res) {
-    console.log(req.query);
     const cId = req.query.cId?req.query.cId:1;
     const page = req.query.page?req.query.page-1:0;
     const pageSize = req.query.pageSize?parseInt(req.query.pageSize):20;
@@ -13,7 +12,6 @@ async function getNews (req, res) {
     try {
         const result = await db.query('SELECT * FROM News WHERE cId = ? ORDER BY aId ASC LIMIT ? OFFSET ?;', [cId, pageSize, page*pageSize]);
         const cnt = await db.query('SELECT COUNT(aId) FROM News WHERE cId = ?', [cId]);
-        console.log(cnt);
         let newsInfo = [];
         if(result.length > 0){
             result.map((val) =>{

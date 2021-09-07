@@ -19,7 +19,6 @@ async function getComment(req, res) {
 
 // 댓글 달기
 async function createComment(req, res) {
-    console.log(req.body);
     try {
         const cId = req.params.cId;
         const encrypt = await security.security(req.body.pw);
@@ -31,7 +30,7 @@ async function createComment(req, res) {
             pw : encrypt.pw,
             pwkey : encrypt.pwKey
         }        
-        console.log(comment);
+        console.log(JSON.stringify(comment));
 
         const result = await db.query('INSERT into Comments SET ?', [comment]);
         
@@ -60,11 +59,10 @@ async function updateComment(req, res) {
             comment : req.body.comment
         }
         
-        const result = await db.query('update Comments set comment = ? where cmId =? and pw = ?', [comment, cmId, secret.pw])
-        console.log(result);
+        const result = await db.query('update Comments set ? where cmId =? and pw = ?', [comment, cmId, secret.pw])
         
         res.status(httpStatus.OK).send({
-            success : result.changedRows?true:false,
+            success : result.affectedRows?true:false,
             commentInfo : comment
         })
         

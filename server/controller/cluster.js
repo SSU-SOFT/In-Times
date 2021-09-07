@@ -42,7 +42,6 @@ async function getClusterAll (req, res) {
 async function getClusterId (req, res) {
     const year = parseInt(req.params.year);
     const cId = req.params.cId;
-    console.log(year);
     try {
         let result = await db.query('select * from Clusters where cId = ?', [cId]);
         const clusterInfo = [];
