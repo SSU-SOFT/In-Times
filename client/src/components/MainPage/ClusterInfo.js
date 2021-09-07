@@ -21,21 +21,19 @@ const ClusterInfo = () => {
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
   const { TextArea } = Input;
-  
 
   const handleOk = async () => {
-    if(pw.length<2 || nickname.length<2 || commentText.length<2){
-
-      if(pw.length<2){
+    if (pw.length < 2 || nickname.length < 2 || commentText.length < 2) {
+      if (pw.length < 2) {
         alert("비밀번호를 2자 이상 입력하세요!");
       }
-      if(nickname.length<2){
+      if (nickname.length < 2) {
         alert("이름을 2자 이상 입력하세요!");
       }
-      if(commentText.length<2){
+      if (commentText.length < 2) {
         alert("내용을 2자 이상 입력하세요!");
       }
-    }else{
+    } else {
       await instance
         .post(`/api/comment/${cId}`, {
           nickname: nickname,
@@ -49,7 +47,7 @@ const ClusterInfo = () => {
         .catch((err) => {
           console.log(err);
         });
-        setIsAddModalVisible(false);
+      setIsAddModalVisible(false);
     }
   };
 
@@ -97,7 +95,12 @@ const ClusterInfo = () => {
       <div className="ClusterInfoMain">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ fontSize: "20px" }}>{cinfo.date}</div>
-          <div style={{ display: "flex", marginBottom:"1em" }}>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            사건 기사 수 : {cinfo.count}
+          </div>
+          <div style={{ display: "flex", marginBottom: "1em" }}>
             {cinfo.category != null
               ? cinfo.category.map((el, i) => <Tag key={i}>{el}</Tag>)
               : null}
@@ -169,7 +172,6 @@ const ClusterInfo = () => {
           title="댓글 입력"
         >
           <div className="CommentInputArea">
-            
             <Input
               placeholder="닉네임을 입력하세요"
               value={nickname}
