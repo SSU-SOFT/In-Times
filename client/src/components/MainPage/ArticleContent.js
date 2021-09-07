@@ -26,7 +26,7 @@ const ArticleContent = () => {
         .then((response) => {
           //console.log("aid", response.data.newsInfo[0]);
           let news = response.data.newsInfo[0];
-          news.category = news.category.split(",");
+          news.category = news.category.replace(/\s/g, "").split(",");
           setArticle(news);
         }) // SUCCESS
         .catch((response) => {

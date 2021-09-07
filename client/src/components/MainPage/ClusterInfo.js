@@ -6,6 +6,7 @@ import instance from "../../module/instance";
 import "../../style/ClusterInfo.css";
 import { Space, Input, Modal,Divider } from "antd";
 import Comment from "./Comment";
+import Tag from './Tag';
 
 const config = require("../../config.json");
 const ClusterInfo = () => {
@@ -80,9 +81,12 @@ const ClusterInfo = () => {
     <>
       <div className="ClusterInfoMain">
         {/* <div>{cinfo.count}</div> */}
-        <div style={{
-          fontSize:"20px"
-        }}>{cinfo.date}</div>
+        <div style={{display:"flex", justifyContent:'space-between'}}>
+          <div style={{fontSize:"20px"}}>{cinfo.date}</div>
+          <div style={{display:"flex"}}>
+            {cinfo.category}
+          </div>
+        </div>
         <Divider
               style={{
                 marginBottom: "10px",
