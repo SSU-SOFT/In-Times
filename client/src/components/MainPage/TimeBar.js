@@ -2,27 +2,21 @@ import React, { useState, useEffect } from "react";
 import "../../style/TimeBar.css";
 
 import { useRecoilState } from "recoil";
-import { yearState,cIdState,aIdState } from "../../state/state";
+import { yearState,cIdState } from "../../state/state";
 
-import { Steps, Divider, Select,Space } from "antd";
+import {  Select,Space } from "antd";
 
-import axios from "axios";
 import instance from "../../module/instance";
 
 import TimeBarAsset from "./TimeBarAsset";
 
-const getItems = () =>
-  Array(20)
-    .fill(0)
-    .map((_, ind) => ({ id: `element-${ind}` }));
 
 
 const TimeBar = () => {
   const [year, setYear] = useRecoilState(yearState);
   const [cId, setCid] = useRecoilState(cIdState);
-  const [aId, setAid] = useRecoilState(aIdState);
+ 
 
-  const [currentVal, setCurrentVal] = useState(0);
   const [cInfo, setcInfo] = useState([]);
   const [items, setItems] = useState([]);
 
@@ -49,53 +43,28 @@ const TimeBar = () => {
           let ordered = [];
           ordered = response.data.clusterInfo;
           ordered.sort(date_ascending);
-          //console.log(ordered)
 
           let tempdate="";
           let tempfirst=[];
 
-          ordered.map((v)=>{
-            if(v.date.substring(5, 7)!=tempdate){
+          ordered.map((v,i)=>{
+            if(v.date.substring(5, 7)!==tempdate){
               tempdate=v.date.substring(5, 7);
               tempfirst.push(v.cId);
             }
+            return(<></>);
           })
 
           setFirstcId(tempfirst);
           setCid(ordered[0].cId);
           setcInfo(ordered);
-          //ordered.map(x => nums.push(x.cId));
-          //cinfos = ordered;
+
         }) // SUCCESS
         .catch((response) => {
           console.log(response);
         }); // ERROR
-    // if (year === 2019) {
 
-      
-    // } else if (year === 2020) {
-    //   setcInfo([]);
-    //   setItems([]);
-    //   setCid(0);
-    //   setAid(0);
-    //   //setdata([])
-    // }
 
-    // console.log(cinfos)
-
-    // const results = nums.reduce((prevPrms, num) => (
-    //   prevPrms.then(async prevRes => {
-    //     const currRes = await instance.get('api/news/?cId=' + num)
-    //     return [...prevRes, currRes]
-    //   })
-    // ), Promise.resolve([]))
-
-    // results.then(response => {
-
-    //   // temp=response
-    //   // temp.map((x)=>datas.push(x))
-    //   setdata(response)
-    // })
   };
 
   
@@ -108,7 +77,6 @@ const TimeBar = () => {
 
   useEffect(() => {
     if(cInfo.length>0){
-
         MakeItem();
     } 
   }, [cInfo]);
@@ -120,17 +88,12 @@ const TimeBar = () => {
     return dateA > dateB ? 1 : -1;
   };
 
-  //   const OnClickIndex = (index) => {
-  //     setPrevIndex(indexval);
-  //     setIndexval(index);
-  //   };
 
   const DropDownSelect = (value) => {
     setYear(value);
   };
 
   const handleScroll = () => {
-    // document.getElementsByClassName("TimeBarStep").scrollTo(-100, 0);
     document.getElementsByClassName("ant-space")[0].scrollTo(0, 0)
   };
 

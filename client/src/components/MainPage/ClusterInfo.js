@@ -31,7 +31,6 @@ const ClusterInfo = () => {
         comment: commentText,
       })
       .then((res) => {
-        //console.log(res.data);
         if (res.data.success) getComments();
         else alert("err");
       })
@@ -45,11 +44,10 @@ const ClusterInfo = () => {
   };
 
   const getData = async () => {
-    if (cId != 0) {
+    if (cId !== 0) {
       instance
         .get(`/api/cluster/${year}/${cId}`)
         .then((response) => {
-          //console.log(response.data.clusterInfo[0]);
           setCinfo(response.data.clusterInfo[0]);
         }) // SUCCESS
         .catch((response) => {
@@ -62,7 +60,6 @@ const ClusterInfo = () => {
     await instance
       .get(`/api/comment/${cId}`)
       .then((res) => {
-        //console.log(res.data);
         setComments(res.data.comments);
       })
       .catch((err) => {
@@ -81,7 +78,6 @@ const ClusterInfo = () => {
   return (
     <>
       <div className="ClusterInfoMain">
-        {/* <div>{cinfo.count}</div> */}
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ fontSize: "20px" }}>{cinfo.date}</div>
           <div style={{ display: "flex", marginBottom:"1em" }}>
@@ -96,15 +92,6 @@ const ClusterInfo = () => {
             marginTop: "2px",
           }}
         />
-        {/* <div className="InfoContent">
-          {cinfo.Topic != null
-            ? cinfo.Topic.map((v, i) => (
-                <div className="Topics" key={i}>
-                  {v}
-                </div>
-              ))
-            : null}
-        </div> */}
         <div className="cinfocontent">
           <div style={{ display: "flex", justifyContent: "center" }}>
             {cinfo.img != null ? (
@@ -153,11 +140,11 @@ const ClusterInfo = () => {
           onCancel={handleCancel}
           footer={
             <div className="ModealFooter">
-              <div onClick={handleCancel} className="button">
-                취소
-              </div>
               <div onClick={handleOk} className="button">
                 확인
+              </div>
+              <div onClick={handleCancel} className="button">
+                취소
               </div>
             </div>
           }

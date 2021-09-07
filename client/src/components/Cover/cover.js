@@ -1,14 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { useRecoilState } from "recoil";
 import { yearState } from "../../state/state";
 
 import "../../style/cover.css";
-import Main from "../MainPage/Main";
-
-import { Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import Timeline from "../timeline";
-
 const Cover = () => {
   const section = useRef(null);
 
@@ -21,12 +15,7 @@ const Cover = () => {
     });
   };
 
-  // useEffect(()=>{
-  //   //console.log(year)
-  // },[year]);
-
   const OnClickYear = (e) => {
-    //console.log(e);
     scrollTo(section);
     setYear(e);
   };
@@ -77,26 +66,6 @@ const Cover = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="circle">
-            <div className="logo">
-              <div>INTIMES</div>
-              <div className="sublogo">Korea News TImeLine Service</div>
-            </div>
-          </div>
-          <div className="circle2" />
-          <div className="CoverButton">
-            <Button type="primary" shape='circle' onClick={()=>scrollTo(section)} style={{
-              width:"4rem",
-              height:"4rem",
-              fontSize:"2rem"
-            }}>
-                <DownOutlined>s</DownOutlined>
-            </Button>
-          </div>
-          <div className="dot dot--one">
-
-          </div> */}
         </div>
         <div className="background"></div>
       </div>

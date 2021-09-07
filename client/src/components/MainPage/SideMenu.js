@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "../../style/SideMenu.css";
 import { useRecoilState } from "recoil";
-import { cIdState, yearState, aIdState,InfoState  } from "../../state/state";
+import { cIdState, aIdState,InfoState  } from "../../state/state";
 import { Pagination, Card } from "antd";
 import Tag from "./Tag";
 import axios from "../../module/instance";
 
 const SideMenu = () => {
-  const [year, setYear] = useRecoilState(yearState);
+
   const [cId, setCid] = useRecoilState(cIdState);
   const [aId, setAid] = useRecoilState(aIdState);
   const [isInfo, setIsinfo] = useRecoilState(InfoState);
@@ -30,7 +30,7 @@ const SideMenu = () => {
   useEffect(() => {
     setPage(1);
 
-    if (cId != 0) {
+    if (cId !== 0) {
       getNews(cId, page, 20);
     } else {
       setNews([]);
@@ -43,7 +43,6 @@ const SideMenu = () => {
     await axios
       .get(`/api/news?cId=${cId}&page=${page}`)
       .then((response) => {
-        //console.log(Math.ceil(response.data.newsCount / 20));
         setAid(response.data.newsInfo[0].aId);
         setNews(response.data.newsInfo);
         setTotalPage(Math.ceil(response.data.newsCount / 20) * 10);
@@ -51,9 +50,6 @@ const SideMenu = () => {
       .catch((response) => {
         console.log(response);
       }); // ERROR
-
-    // setNews(result.data.newsInfo);
-    // console.log(result.data.newsInfo)
   };
 
   const onChange = (page) => {

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "../../style/TimeBarAsset.css";
 import { cIdState,InfoState } from "../../state/state";
 import { useRecoilState} from "recoil";
-import { Popover, Divider, Card } from "antd";
-import { AiOutlineCaretUp } from "react-icons/ai";
+import { Popover, Divider } from "antd";
+
 const config = require("../../config.json");
 
 const TimeBarAsset = (props) => {
   const { clusterInfo,firsts } = props;
 
-  const { Meta } = Card;
+
   const [isfirst,setIsfirst]=useState(false);
   const [cId, setCid] = useRecoilState(cIdState);
   const [isInfo, setIsinfo] = useRecoilState(InfoState);
@@ -29,7 +29,7 @@ const TimeBarAsset = (props) => {
   };
 
   useEffect(() => {
-    if (cId == clusterInfo.cId) {
+    if (cId === clusterInfo.cId) {
       setActive(true);
     } else {
       setActive(false);
@@ -75,10 +75,11 @@ const TimeBarAsset = (props) => {
       case "12":
         setColor("#1B8092");
         break;
+      default:
+        break;
     }
 
-    if(firsts.indexOf(clusterInfo.cId)!=-1){
-      //console.log("first:",firsts)
+    if(firsts.indexOf(clusterInfo.cId)!==-1){
       setIsfirst(true);
     }else{
       setIsfirst(false);
@@ -99,7 +100,7 @@ const TimeBarAsset = (props) => {
         <img
           src={config.server + ":5000" + clusterInfo.img}
           width="200px"
-        ></img>
+          alt="wordcloud" ></img>
       </div>
 
       <div className="CardContent">
@@ -120,11 +121,9 @@ const TimeBarAsset = (props) => {
             backgroundColor: color,
           }}
         >
-          {/* <AiOutlineCaretUp/> */}
           {
             isfirst?<div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div>:null
           }
-          {/* <div className="AssetDate">{clusterInfo.date.substring(5, 7)}</div> */}
         </div>
       </Popover>
     </>

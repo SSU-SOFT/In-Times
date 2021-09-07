@@ -4,14 +4,13 @@ import { useRecoilState } from "recoil";
 import { cIdState, yearState, aIdState, InfoState } from "../../state/state";
 import axios from "../../module/instance";
 import Tag from "./Tag";
-import comment_icon from "../../assets/icons/comment.png";
-import { Modal, Divider, Button  } from "antd";
+
+import {  Divider } from "antd";
 import ClusterInfo from "./ClusterInfo";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const ArticleContent = () => {
-  const [year, setYear] = useRecoilState(yearState);
-  const [cId, setCid] = useRecoilState(cIdState);
+
   const [aId, setAid] = useRecoilState(aIdState);
   const [isInfo, setIsinfo] = useRecoilState(InfoState);
 
@@ -20,11 +19,10 @@ const ArticleContent = () => {
 
 
   const getArticles = async () => {
-    if (aId != 0) {
+    if (aId !== 0) {
       await axios
         .get(`/api/news/${aId}`)
         .then((response) => {
-          //console.log("aid", response.data.newsInfo[0]);
           let news = response.data.newsInfo[0];
           news.category = news.category.replace(/\s/g, "").split(",");
           setArticle(news);
@@ -97,7 +95,7 @@ const ArticleContent = () => {
             />
             <div className="content">
               <div style={{ display: "flex", justifyContent: "center" }}>
-                {article.img != "/images/no-image.png" ? (
+                {article.img !== "/images/no-image.png" ? (
                   <>
                     <img src={article.img}></img>
                   </>

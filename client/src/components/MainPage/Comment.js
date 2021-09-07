@@ -97,11 +97,11 @@ const Comment = ({ children, onUpdate }) => {
           onCancel={DeletehandleCancel}
           footer={
             <div className="ModealFooter">
-              <div onClick={DeletehandleCancel} className="button">
-                취소
-              </div>
               <div onClick={DeletehandleOK} className="button">
                 확인
+              </div>
+              <div onClick={DeletehandleCancel} className="button">
+                취소
               </div>
             </div>
           }
@@ -115,11 +115,11 @@ const Comment = ({ children, onUpdate }) => {
           onCancel={RevisehandleCancel}
           footer={
             <div className="ModealFooter">
-              <div onClick={RevisehandleCancel} className="button">
-                취소
-              </div>
               <div onClick={RevisehandleOK} className="button">
                 확인
+              </div>
+              <div onClick={RevisehandleCancel} className="button">
+                취소
               </div>
             </div>
           }
