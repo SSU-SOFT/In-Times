@@ -4,9 +4,9 @@ import { useRecoilState } from "recoil";
 import comment_icon from "../../assets/icons/comment.png";
 import instance from "../../module/instance";
 import "../../style/ClusterInfo.css";
-import { Space, Input, Modal,Divider } from "antd";
+import { Space, Input, Modal, Divider } from "antd";
 import Comment from "./Comment";
-import Tag from './Tag';
+import Tag from "./Tag";
 
 const config = require("../../config.json");
 const ClusterInfo = () => {
@@ -22,21 +22,22 @@ const ClusterInfo = () => {
 
   const { TextArea } = Input;
 
-  const handleOk = async() => {
+  const handleOk = async () => {
     setIsAddModalVisible(false);
-    await instance.post(`/api/comment/${cId}`, {
-      nickname : nickname,
-      pw : pw,
-      comment : commentText
-    }).then((res)=>{
-      //console.log(res.data);
-      if(res.data.success)
-        getComments();
-      else
-        alert("err")
-    }).catch((err)=>{
-      console.log(err);
-    })
+    await instance
+      .post(`/api/comment/${cId}`, {
+        nickname: nickname,
+        pw: pw,
+        comment: commentText,
+      })
+      .then((res) => {
+        //console.log(res.data);
+        if (res.data.success) getComments();
+        else alert("err");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleCancel = () => {
@@ -57,7 +58,7 @@ const ClusterInfo = () => {
     }
   };
 
-  const getComments = async() => {
+  const getComments = async () => {
     await instance
       .get(`/api/comment/${cId}`)
       .then((res) => {
@@ -67,10 +68,10 @@ const ClusterInfo = () => {
       .catch((err) => {
         console.log(err);
       });
-    setNickname('');
-    setPW('');
-    setCommentText('');
-  }
+    setNickname("");
+    setPW("");
+    setCommentText("");
+  };
 
   useEffect(() => {
     getData();
@@ -81,18 +82,20 @@ const ClusterInfo = () => {
     <>
       <div className="ClusterInfoMain">
         {/* <div>{cinfo.count}</div> */}
-        <div style={{display:"flex", justifyContent:'space-between'}}>
-          <div style={{fontSize:"20px"}}>{cinfo.date}</div>
-          <div style={{display:"flex"}}>
-            {cinfo.category}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ fontSize: "20px" }}>{cinfo.date}</div>
+          <div style={{ display: "flex", marginBottom:"1em" }}>
+            {cinfo.category != null
+              ? cinfo.category.map((el, i) => <Tag key={i}>{el}</Tag>)
+              : null}
           </div>
         </div>
         <Divider
-              style={{
-                marginBottom: "10px",
-                marginTop: "2px",
-              }}
-            />
+          style={{
+            marginBottom: "10px",
+            marginTop: "2px",
+          }}
+        />
         {/* <div className="InfoContent">
           {cinfo.Topic != null
             ? cinfo.Topic.map((v, i) => (
@@ -113,9 +116,16 @@ const ClusterInfo = () => {
           </div>
         </div>
 
-        <Space style={{ padding: "10px", width: "100%", overflowX: "scroll" }} className="Memos">
+        <Space
+          style={{ padding: "10px", width: "100%", overflowX: "scroll" }}
+          className="Memos"
+        >
           {comments.map((el, i) => {
-            return <Comment onUpdate={getComments} key={i}>{el}</Comment>;
+            return (
+              <Comment onUpdate={getComments} key={i}>
+                {el}
+              </Comment>
+            );
           })}
         </Space>
         <div
@@ -127,10 +137,15 @@ const ClusterInfo = () => {
             height: "50px",
           }}
           onClick={() => {
-            setIsAddModalVisible(true)
+            setIsAddModalVisible(true);
           }}
         >
-          <img src={comment_icon} width={50} height={50} className="CommentButton"/>
+          <img
+            src={comment_icon}
+            width={50}
+            height={50}
+            className="CommentButton"
+          />
         </div>
 
         <Modal
@@ -150,9 +165,28 @@ const ClusterInfo = () => {
           title="댓글 입력"
         >
           <div className="CommentInputArea">
-              <Input placeholder="닉네임을 입력하세요" value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/>
-              <Input.Password placeholder="비밀번호를 입력하세요" value={pw} onChange={(e)=>{setPW(e.target.value)}}/>
-              <TextArea placeholder="댓글을 입력하세요" value={commentText} onChange={(e)=>{setCommentText(e.target.value)}} maxLength={200}></TextArea>
+            <Input
+              placeholder="닉네임을 입력하세요"
+              value={nickname}
+              onChange={(e) => {
+                setNickname(e.target.value);
+              }}
+            />
+            <Input.Password
+              placeholder="비밀번호를 입력하세요"
+              value={pw}
+              onChange={(e) => {
+                setPW(e.target.value);
+              }}
+            />
+            <TextArea
+              placeholder="댓글을 입력하세요"
+              value={commentText}
+              onChange={(e) => {
+                setCommentText(e.target.value);
+              }}
+              maxLength={200}
+            ></TextArea>
           </div>
         </Modal>
       </div>

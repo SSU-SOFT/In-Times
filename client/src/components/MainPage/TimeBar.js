@@ -101,6 +101,9 @@ const TimeBar = () => {
   
   useEffect(() => {
     getData();
+    return ()=>{
+      handleScroll();
+    };
   }, [year]);
 
   useEffect(() => {
@@ -126,31 +129,28 @@ const TimeBar = () => {
     setYear(value);
   };
 
+  const handleScroll = () => {
+    // document.getElementsByClassName("TimeBarStep").scrollTo(-100, 0);
+    document.getElementsByClassName("ant-space")[0].scrollTo(0, 0)
+  };
+
   return (
     <>
       <div className="TimeBarMain">
       <div className="SetYearArea">
-          <Select onChange={DropDownSelect} defaultValue={year}>
+          <Select onChange={DropDownSelect} defaultValue={year} value={year}>
             <Option value={2019}>2019</Option>
             <Option value={2020}>2020</Option>
             <Option value={2021}>2021</Option>
           </Select>
-        </div>
-        <Space className="TimeBarStep">
-          {items.map((v,i) => v)}
+      </div>
 
-          {/* <Steps progressDot current={currentVal} onChange={onChange}>
-            {items.map((v) => {
-              return (
-                <>
-                  <Step description="This is a description." />
-                </>
-              );
-            })}
-          </Steps> */}
+         <Space className="TimeBarStep" >
+
+            {items.map((v,i) => v)}
         </Space>
-    
-        {/* <Divider></Divider> */}
+
+       
       </div>
     </>
   );
