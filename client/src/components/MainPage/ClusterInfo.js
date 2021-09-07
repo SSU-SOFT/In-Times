@@ -21,25 +21,42 @@ const ClusterInfo = () => {
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
   const { TextArea } = Input;
+  
 
   const handleOk = async () => {
-    setIsAddModalVisible(false);
-    await instance
-      .post(`/api/comment/${cId}`, {
-        nickname: nickname,
-        pw: pw,
-        comment: commentText,
-      })
-      .then((res) => {
-        if (res.data.success) getComments();
-        else alert("err");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if(pw.length<2 || nickname.length<2 || commentText.length<2){
+
+      if(pw.length<2){
+        alert("비밀번호를 2자 이상 입력하세요!");
+      }
+      if(nickname.length<2){
+        alert("이름을 2자 이상 입력하세요!");
+      }
+      if(commentText.length<2){
+        alert("내용을 2자 이상 입력하세요!");
+      }
+    }else{
+      await instance
+        .post(`/api/comment/${cId}`, {
+          nickname: nickname,
+          pw: pw,
+          comment: commentText,
+        })
+        .then((res) => {
+          if (res.data.success) getComments();
+          else alert("err");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        setIsAddModalVisible(false);
+    }
   };
 
   const handleCancel = () => {
+    setNickname("");
+    setPW("");
+    setCommentText("");
     setIsAddModalVisible(false);
   };
 
@@ -152,6 +169,7 @@ const ClusterInfo = () => {
           title="댓글 입력"
         >
           <div className="CommentInputArea">
+            
             <Input
               placeholder="닉네임을 입력하세요"
               value={nickname}
