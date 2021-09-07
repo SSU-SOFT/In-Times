@@ -43,7 +43,7 @@ const ClusterInfo = () => {
   };
 
   const getData = async () => {
-    if (year === 2019 && cId != 0) {
+    if (cId != 0) {
       instance
         .get(`/api/cluster/${year}/${cId}`)
         .then((response) => {
@@ -53,9 +53,6 @@ const ClusterInfo = () => {
         .catch((response) => {
           console.log(response);
         }); // ERROR
-      
-    } else if (year === 2020) {
-      setCinfo({});
     }
   };
 

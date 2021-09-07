@@ -43,9 +43,7 @@ const TimeBar = () => {
   };
 
   const getData = async () => {
-    if (year === 2019) {
-
-      await instance
+    await instance
         .get(`/api/cluster/${year}`)
         .then((response) => {
           let ordered = [];
@@ -72,13 +70,16 @@ const TimeBar = () => {
         .catch((response) => {
           console.log(response);
         }); // ERROR
-    } else if (year === 2020) {
-      setcInfo([]);
-      setItems([]);
-      setCid(0);
-      setAid(0);
-      //setdata([])
-    }
+    // if (year === 2019) {
+
+      
+    // } else if (year === 2020) {
+    //   setcInfo([]);
+    //   setItems([]);
+    //   setCid(0);
+    //   setAid(0);
+    //   //setdata([])
+    // }
 
     // console.log(cinfos)
 
@@ -129,9 +130,10 @@ const TimeBar = () => {
     <>
       <div className="TimeBarMain">
       <div className="SetYearArea">
-          <Select onChange={DropDownSelect} defaultValue={2019}>
+          <Select onChange={DropDownSelect} defaultValue={year}>
             <Option value={2019}>2019</Option>
             <Option value={2020}>2020</Option>
+            <Option value={2021}>2021</Option>
           </Select>
         </div>
         <Space className="TimeBarStep">

@@ -60,12 +60,20 @@ const Cover = () => {
                 2019
               </div>
             </div>
+          </div>
 
-            <div id="outer-orbit2">
-              <div className="outer-orbit-cirlces2">
-                <div className="YearLink" onClick={() => OnClickYear(2020)}>
-                  2020
-                </div>
+          <div id="outer-orbit2">
+            <div className="outer-orbit-cirlces2">
+              <div className="YearLink" onClick={() => OnClickYear(2020)}>
+                2020
+              </div>
+            </div>
+          </div>
+
+          <div id="outer-orbit3">
+            <div className="outer-orbit-cirlces3">
+              <div className="YearLink" onClick={() => OnClickYear(2021)}>
+                2021
               </div>
             </div>
           </div>

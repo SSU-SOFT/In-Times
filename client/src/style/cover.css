@@ -111,6 +111,37 @@
    
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
  } 
+
+ #outer-orbit3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 6vmax;
+    width: 5em;
+    height: 5em;
+    border-radius: 100%;
+    pointer-events: none; 
+    animation: spin-right 20s linear infinite;
+}
+
+.outer-orbit-cirlces3 {
+    position: absolute;
+    font-size: 1vmax;
+    top: -3em;
+    left: 0;
+
+    user-select:none;
+    pointer-events: all; 
+
+    width: 3em;
+    height: 3em;
+    color: white;
+    border-radius: 100%;
+    border: 0.2em solid white;
+    background-color: #9055A2;
+   
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+ } 
 .outer-orbit-cirlces1:hover{
     background-color: #2d1499;
     transition: background-color 0.5s;
@@ -121,6 +152,11 @@
     transition: background-color 0.5s;
 
 }
+.outer-orbit-cirlces3:hover{
+    background-color: #D499B9;
+    transition: background-color 0.5s;
+}
+
 
 @keyframes spin-right {
     100% {
