@@ -19,7 +19,7 @@ async function getClusterAll (req, res) {
                 clusterInfo.push({
                     cId : val.cId,
                     count : val.count,
-                    category : val.category,
+                    category : val.category.replace(/\s/g, "").split(","),
                     Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(',').slice(0,5),
                     summary : val.summary,
                     img : val.img,
@@ -52,7 +52,7 @@ async function getClusterId (req, res) {
                 clusterInfo.push({
                     cId : val.cId,
                     count : val.count,
-                    category : val.category,
+                    category : val.category.replace(/\s/g, "").split(","),
                     Topic : val.Topic.replace(/\[|\]|\'| /g, "").split(','),
                     summary : val.summary,
                     img : val.img,
